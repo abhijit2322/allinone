@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="gender">
+        <item>@string/male</item>
+        <item>@string/female</item>
+        <item>@string/other</item>
+    </string-array>
+
+    <string-array name="skils">
+        <item>@string/doctor</item>
+        <item>@string/nurse</item>
+        <item>@string/medical_service_provider</item>
+        <item>@string/electician</item>
+        <item>@string/plumber</item>
+        <item>@string/medical_service_provider</item>
+        <item>@string/medicine_shop_owner</item>
+        <item>@string/vegitable_shop_owner</item>
+        <item>@string/medical_service_provider</item>
+        <item>@string/meat_fish_shop_owner</item>
+        <item>@string/grocery_shop_owner</item>
+        <item>@string/entertain</item>
+        <item>@string/germents_shop_owner</item>
+        <item>@string/household_paper_work</item>
+        <item>@string/painter</item>
+        <item>@string/painting_shop_owner</item>
+        <item>@string/hardware_shop_owner</item>
+        <item>@string/book_shop_owner</item>
+        <item>@string/serviceprovder_houshold</item>
+
+    </string-array>
+
+</resources>

@@ -8,4 +8,37 @@
     <string name="skills">Skills</string>
     <string name="ratings">Star Ratings</string>
     <string name="samplereview">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium bibendum sapien, ut euismod massa. Duis convallis sem sed turpis elementum auctor.</string>
+
+    <!--Other string resources also defined in this file… -->
+    <string name="male">M</string>
+    <string name="female">F</string>
+    <string name="other">Others</string>
+    <string name="feedbacktype">Gender Selection</string>
+    <!--Other skills started… -->
+    <string name="skilltype">Skill Selection</string>
+    <string name="doctor">Doctor</string>
+    <string name="nurse">Nurse</string>
+    <string name="medical_service_provider">Medical service Provider</string>
+    <string name="electician">Electician</string>
+    <string name="plumber">plumber</string>
+    <string name="medicine_shop_owner">Medicine Shop Owner</string>
+    <string name="vegitable_shop_owner">Vegitable Shop Owner</string>
+    <string name="meat_fish_shop_owner">Meat-Fish Shop Owner</string>
+    <string name="grocery_shop_owner">Grocery Shop Owner</string>
+    <string name="germents_shop_owner">Germents Shop Owner</string>
+    <string name="book_shop_owner">Book Stall Owner</string>
+    <string name="hardware_shop_owner">Hardware Shop Owner</string>
+    <string name="painting_shop_owner">Painting Shop Owner</string>
+    <string name="entertain">Entertainer</string>
+    <string name="household_paper_work">"Electricity..Mobile...Gas-filling.."</string>
+    <string name="serviceprovder_houshold">Houshold Service Provider</string>
+    <string name="painter">Painter</string>
+
+
+
+
+
+
+
+
 </resources>

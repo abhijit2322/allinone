@@ -2,8 +2,8 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ScrollView01"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:scrollbars="vertical">
     <LinearLayout
         android:layout_width="fill_parent"
@@ -14,7 +14,7 @@
             android:id="@+id/TextViewTitle1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enter Profile Name"
+            android:text="Enter Profile Name *"
             android:textSize="10pt">
         </TextView>
 
@@ -25,13 +25,31 @@
             android:inputType="textPersonName"
             android:layout_width="fill_parent">
         </EditText>
+
+        <TextView
+            android:id="@+id/TextViewTitle9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your designation "
+            android:textSize="10pt">
+        </TextView>
+
+        <EditText
+            android:id="@+id/reg_designation"
+            android:layout_height="wrap_content"
+            android:hint="Enter your experience "
+            android:inputType="textPersonName"
+            android:layout_width="fill_parent">
+        </EditText>
+
         <TextView
             android:id="@+id/TextViewTitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enter your address Name"
+            android:text="Enter your address Name *"
             android:textSize="10pt">
         </TextView>
+
 
         <EditText
             android:id="@+id/reg_address"
@@ -45,7 +63,7 @@
             android:id="@+id/TextViewTitle3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enter your Contact Number"
+            android:text="Enter your Contact Number *"
             android:textSize="10pt">
         </TextView>
 
@@ -57,7 +75,127 @@
             android:layout_width="fill_parent">
         </EditText>
 
+        <TextView
+            android:id="@+id/TextViewTitle4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your Gender  *"
+            android:textSize="10pt">
+        </TextView>
+
+        <Spinner
+            android:id="@+id/gender_spinner"
+            android:layout_height="wrap_content"
+            android:prompt="@string/feedbacktype"
+            android:layout_width="fill_parent"
+            android:entries="@array/gender">
+        </Spinner>
+
+        <TextView
+            android:id="@+id/TextViewTitle5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your Skils  *"
+            android:textSize="10pt">
+        </TextView>
+
+        <Spinner
+            android:id="@+id/skill_spinner"
+            android:layout_height="wrap_content"
+            android:prompt="@string/skilltype"
+            android:layout_width="fill_parent"
+            android:entries="@array/skils">
+        </Spinner>
+
+        <TextView
+            android:id="@+id/TextViewTitle6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your email"
+            android:textSize="10pt">
+        </TextView>
+
+        <EditText
+            android:id="@+id/reg_email_address"
+            android:layout_height="wrap_content"
+            android:hint="Enter your email"
+            android:inputType="textPersonName"
+            android:layout_width="fill_parent">
+        </EditText>
+
+        <TextView
+            android:id="@+id/TextViewTitle7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your company address"
+            android:textSize="10pt">
+        </TextView>
+
+        <EditText
+            android:id="@+id/reg_com_address"
+            android:layout_height="wrap_content"
+            android:hint="Enter your company address"
+            android:inputType="textPersonName"
+            android:layout_width="fill_parent">
+        </EditText>
+
+        <TextView
+            android:id="@+id/TextViewTitle8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your experience "
+            android:textSize="10pt">
+        </TextView>
+
+        <EditText
+            android:id="@+id/reg_exp"
+            android:layout_height="wrap_content"
+            android:hint="Enter your experience "
+            android:inputType="textPersonName"
+            android:layout_width="fill_parent">
+        </EditText>
+
+        <TextView
+            android:id="@+id/TextViewTitle10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your company address "
+            android:textSize="10pt">
+        </TextView>
+
+        <EditText
+            android:id="@+id/reg_company_address"
+            android:layout_height="wrap_content"
+            android:hint="Enter your company address "
+            android:inputType="textPersonName"
+            android:layout_width="fill_parent">
+        </EditText>
+
+        <TextView
+            android:id="@+id/TextViewTitle11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter  you are best in..... "
+            android:textSize="10pt">
+        </TextView>
+
+        <EditText
+            android:id="@+id/reg_about_me"
+            android:layout_height="wrap_content"
+            android:hint="Enter  you are best in..... "
+            android:inputType="textPersonName"
+            android:layout_width="fill_parent">
+        </EditText>
+
         <!--Put form controls here-->
+
+        <Button
+            android:id="@+id/register"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:onClick="sendRegistration"
+            android:layout_width="fill_parent">
+        </Button>
 
     </LinearLayout>
 </ScrollView>

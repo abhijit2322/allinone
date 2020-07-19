@@ -2,6 +2,7 @@ package com.abhijit.allinone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +31,9 @@ public class ProfileActivity extends AppCompatActivity {
         experiencebtn = findViewById(R.id.experiencebtn);
         reviewbtn = findViewById(R.id.reviewbtn);
 
+
+
+
         profile_name=findViewById(R.id.profile_name);
         profession_name=findViewById(R.id.profession_name);
         about_me=findViewById(R.id.about_me);
@@ -45,24 +49,43 @@ public class ProfileActivity extends AppCompatActivity {
         exp_duration=findViewById(R.id.exp_duration);
         profile_Image=findViewById(R.id.profile_Image);
 
+        Intent i = getIntent();
 
-        profile_name.setText("Abhijit Sarkar");
-        profession_name.setText("Senior Architect "+"My iD:"+"124321");
-        about_me.setText("I am well good problem solver");
-        contact_no.setText("+919740856007");
-        email_id.setText("abc@gmail.com");
-        place_name.setText("Agartala");
-        skill_names.setText("plumbing,painting");
-        company_email.setText("DHDGD@gmail.com");
-        company_location.setText("Jirania-Tripura");
-        exp_title.setText("Plumber");
-        exp_place.setText("Agaratala");
-        exp_duration.setText("1998 to 2022");
+        String customer_id=i.getStringExtra("cust_id");
 
-        if(gender.contains("m"))
+        profile_name.setText(i.getStringExtra("name"));
+        if (i.getStringExtra("desg").isEmpty())
+            profession_name.setText(i.getStringExtra("skill")+"(My Id- "+customer_id+" )");
+        else
+            profession_name.setText(i.getStringExtra("desg")+"(My Id-"+customer_id+")");
+
+        about_me.setText(i.getStringExtra("about_me"));
+
+        contact_no.setText(i.getStringExtra("contact_number"));
+        email_id.setText(i.getStringExtra("email"));
+        place_name.setText(i.getStringExtra("address"));
+        skill_names.setText(i.getStringExtra("skill"));
+        company_email.setText(i.getStringExtra("email"));
+        if (i.getStringExtra("company_address").isEmpty())
+            company_location.setText(i.getStringExtra("address"));
+        else
+            company_location.setText(i.getStringExtra("company_address"));
+
+        exp_title.setText(i.getStringExtra("skill"));
+
+
+        if (i.getStringExtra("company_address").isEmpty())
+            exp_place.setText(i.getStringExtra("address"));
+        else
+            exp_place.setText(i.getStringExtra("company_address"));
+
+        exp_duration.setText(i.getStringExtra("experience"));
+
+        if(i.getStringExtra("gender").contains("M"))
             profile_Image.setImageResource(R.drawable.user_male);
         else
             profile_Image.setImageResource(R.drawable.user_female);
+
 
 
 
