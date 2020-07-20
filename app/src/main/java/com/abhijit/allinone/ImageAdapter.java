@@ -21,11 +21,41 @@ import android.widget.TextView;
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
-    public ImageAdapter(Context c) {
+    String citizen_request;
+    Integer[] thumbImages;
+    String[] imagefooter;
+
+    public ImageAdapter(Context c,String Cr) {
         mContext = c;
+        citizen_request=Cr;
+        if(citizen_request.contains("main")){
+            thumbImages=AppGlobalSetting.thumbImages_main;
+            imagefooter=AppGlobalSetting.imagefooter_main;
+        }
+        else if(citizen_request.contains("house")){
+            thumbImages=AppGlobalSetting.thumbImages_house;
+            imagefooter=AppGlobalSetting.imagefooter_house;
+        }
+        else if(citizen_request.contains("education")){
+            thumbImages=AppGlobalSetting.thumbImages_education;
+            imagefooter=AppGlobalSetting.imagefooter_education;
+        }
+        else if(citizen_request.contains("medical")){
+            thumbImages=AppGlobalSetting.thumbImages_medical;
+            imagefooter=AppGlobalSetting.imagefooter_medical;
+        }
+        else if(citizen_request.contains("construction")){
+            thumbImages=AppGlobalSetting.thumbImages_construction;
+            imagefooter=AppGlobalSetting.imagefooter_construction;
+        }
+        else if(citizen_request.contains("entertainment")){
+            thumbImages=AppGlobalSetting.thumbImages_entertainment;
+            imagefooter=AppGlobalSetting.imagefooter_entertainment;
+        }
+
     }
     public int getCount() {
-        return AppGlobalSetting.thumbImages.length;
+        return thumbImages.length;
     }
     public Object getItem(int position) {
         return null;
@@ -48,6 +78,7 @@ public class ImageAdapter extends BaseAdapter {
         return imageView;*/
 
 
+
         // TODO Auto-generated method stub
         View grid;
         LayoutInflater inflater = (LayoutInflater) mContext
@@ -59,8 +90,9 @@ public class ImageAdapter extends BaseAdapter {
             grid = inflater.inflate(R.layout.grid_single, null);
             TextView textView = (TextView) grid.findViewById(R.id.grid_text);
             ImageView imageView = (ImageView)grid.findViewById(R.id.grid_image);
-            textView.setText(AppGlobalSetting.imagefooter[position]);//"addwd");//web[position]);
-            imageView.setImageResource(AppGlobalSetting.thumbImages[position]);
+            textView.setText(imagefooter[position]);//"addwd");//web[position]);
+            textView.setMarqueeRepeatLimit(5);
+            imageView.setImageResource(thumbImages[position]);
         } else {
             grid = (View) convertView;
         }
