@@ -4,12 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.abhijit.allinone.model.FirebaseDBModel_Provider;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -18,6 +22,7 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,6 +31,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
     EditText etPhone, etOtp;
     Button btSendOtp, btResendOtp, btVerifyOtp;
     private FirebaseAuth mAuth;
+    FirebaseFirestore db;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     String mVerificationId;
 
@@ -95,6 +101,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                                 if (task.isSuccessful()) {
                                     FirebaseUser user = task.getResult().getUser();
                                     Toast.makeText(Login_FireBase.this, "Verification Success", Toast.LENGTH_SHORT).show();
+                                    addNewContact(user.getPhoneNumber());
                                 } else {
                                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                         Toast.makeText(Login_FireBase.this, "Verification Failed, Invalid credentials", Toast.LENGTH_SHORT).show();
@@ -110,6 +117,32 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                 break;*/
 
         }
+    }
+
+    private void addNewContact(String phNo) {
+
+        FirebaseDBModel_Provider pbdata=new FirebaseDBModel_Provider();
+        pbdata.setName("dummy");
+        pbdata.setAddress("dummy");
+        pbdata.setContact_number(phNo);
+        pbdata.setIsonline(true);
+
+        db.collection("PhoneBook").document("Contacts").set(pbdata)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Login_FireBase.this, "User Registered",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Login_FireBase.this, "ERROR" + e.toString(),
+                                Toast.LENGTH_SHORT).show();
+                        Log.d("TAG", e.toString());
+                    }
+                });
     }
 
 }

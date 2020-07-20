@@ -35,14 +35,16 @@ public class TrackProvider extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         textDisplay = findViewById(R.id.textDisplay);
         addNewContact();
+        ReadSingleContact();
+        UpdateData();
     }
 
     private void addNewContact() {
 
         FirebaseDBModel_Provider pbdata=new FirebaseDBModel_Provider();
-        pbdata.setName("Abhijit");
+        pbdata.setName("Abhijit1");
         pbdata.setAddress("Bangalore");
-        pbdata.setContact_number("9740856007");
+        pbdata.setContact_number("9740856008");
         pbdata.setIsonline(true);
 
         db.collection("PhoneBook").document("Contacts").set(pbdata)
@@ -71,11 +73,12 @@ public class TrackProvider extends AppCompatActivity {
             public void onComplete(@NonNull Task< DocumentSnapshot > task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot doc = task.getResult();
-                    //FirebaseDBModel_Provider pbdat=task.getResult();
+                    //FirebaseDBModel_Provider pbdat=(FirebaseDBModel_Provider)task.getResult();
                     StringBuilder fields = new StringBuilder("");
-                    fields.append("Name: ").append(doc.get("Name"));
-                    fields.append("\nEmail: ").append(doc.get("Email"));
-                    fields.append("\nPhone: ").append(doc.get("Phone"));
+                    fields.append("Name: ").append(doc.get("name"));
+                    fields.append("\nEmail: ").append(doc.get("address"));
+                    fields.append("\nPhone: ").append(doc.get("contact_number"));
+                    fields.append("\nOnline status: ").append(doc.get("isonline"));
                     textDisplay.setText(fields.toString());
                 }
             }
@@ -83,6 +86,20 @@ public class TrackProvider extends AppCompatActivity {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
+
+    private void UpdateData() {
+        DocumentReference contact = db.collection("PhoneBook").document("Contacts");
+       /* contact.update(NAME_KEY, "Kenny");
+        contact.update(EMAIL_KEY, "kenny@gmail.com");*/
+        contact.update("isonline", "false")
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(TrackProvider.this, "Updated Successfully",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
