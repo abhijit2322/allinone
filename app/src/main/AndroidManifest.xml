@@ -10,9 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-         <!-- <activity android:name=".DashBoard"> -->
-        <activity android:name=".ImageGrid">
-
+        <!-- <activity android:name=".DashBoard"> -->
+        <activity android:name=".TrackProvider">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,6 +24,7 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".DashBoard" />
         <activity android:name=".ImageAdapter" />
+        <activity android:name=".ImageGrid"/>
     </application>
 
 </manifest>
