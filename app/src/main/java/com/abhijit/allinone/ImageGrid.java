@@ -37,13 +37,13 @@ public class ImageGrid extends AppCompatActivity {
                     request_type="entertainment";
 
                 else if(AppGlobalSetting.imagefooter_main[position].contains("Grocery"))
-                    request_type="grocery";
+                    request_type="Grocery Shop";
                 else if(AppGlobalSetting.imagefooter_main[position].contains("Germent"))
-                    request_type="germent";
+                    request_type="Germent Shop";
                 else if(AppGlobalSetting.imagefooter_main[position].contains("Vegitable"))
-                    request_type="vegitable";
+                    request_type="Vegitable Shop";
                 else if(AppGlobalSetting.imagefooter_main[position].contains("Meet&Fish"))
-                    request_type="meet_fish";
+                    request_type="Meet&Fish Shop";
 
 
                /* else if(AppGlobalSetting.imagefooter_main[position].contains("Education"))

@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+
+
 public class ProcessCitizenRequest extends AppCompatActivity {
 
     String[] imagefooter;
@@ -44,13 +46,20 @@ public class ProcessCitizenRequest extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
                     Toast.makeText(ProcessCitizenRequest.this, "Image Position: " + imagefooter[position], Toast.LENGTH_SHORT).show();
+                    AppGlobalSetting.occopassion=imagefooter[position];
+                    startActivity(new Intent(ProcessCitizenRequest.this, OnlinePresentUser.class));
 
 
             }
         });
         }
-        else
-            pass_for_single=false;
+        else {
+            pass_for_single = false;
+            Toast.makeText(ProcessCitizenRequest.this, "Image Position: " + request_for, Toast.LENGTH_SHORT).show();
+            AppGlobalSetting.occopassion=request_for;
+            finish();
+            startActivity(new Intent(ProcessCitizenRequest.this, OnlinePresentUser.class));
+        }
 
     }
 }
