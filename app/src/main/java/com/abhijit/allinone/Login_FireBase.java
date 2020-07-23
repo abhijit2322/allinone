@@ -53,7 +53,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
         btResendOtp = findViewById(R.id.bt_resend_otp);
         btVerifyOtp = findViewById(R.id.bt_verify_otp);
 
-        occpas_spinner=findViewById(R.id.gender_spinner);
+        occpas_spinner=findViewById(R.id.occopassion);
         btResendOtp.setOnClickListener(this);
         btVerifyOtp.setOnClickListener(this);
         btSendOtp.setOnClickListener(this);
