@@ -35,5 +35,8 @@
     <string name="painter">Painter</string>
     <string name="sign_out">Sign Out</string>
 
+    <string name="service_provider">Service Provider</string>
+    <string name="customer">Citizent</string>
+
 
 </resources>

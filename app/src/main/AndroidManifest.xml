@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <!-- <activity android:name=".DashBoard"> -->
-        <activity android:name=".FirebaseChat.FirebaseMainChatActivity">
+        <activity android:name=".Login_FireBase">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".RegistrationForm" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Login_FireBase" />
+      <!--  <activity android:name=".Login_FireBase" />-->
         <activity android:name=".ProfileActivity" />
         <activity android:name=".DashBoard" />
         <activity android:name=".ImageAdapter" />
@@ -31,12 +31,13 @@
         <activity android:name=".ChatWithContacts" />
         <activity android:name=".FirebaseRealtime" />
         <activity android:name=".OnlinePresentUser" />
-        <activity android:name=".ImageGrid" />
+       <!-- <activity android:name=".ImageGrid" /> -->
         <activity android:name=".ImageUpload" />
         <!-- <activity android:name=".DisplayImagesActivity"/>-->
         <activity android:name=".DownloadImageFB" />
         <activity android:name=".DisplayImagesActivity"/>
-       <!--  <<activity android:name=".FirebaseChat.FirebaseMainChatActivity"/> -->
+        <activity android:name=".FirebaseChat.FirebaseMainChatActivity"/>
+        <activity android:name="ImageGrid"/>
     </application>
 
 </manifest>

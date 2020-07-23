@@ -45,4 +45,21 @@ tools:context=".Login_FireBase">
     android:layout_height="wrap_content"
     android:layout_marginTop="15dp"
     android:text="Verify OTP" />
+
+    <TextView
+        android:id="@+id/TextViewTitle5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Occupasion  *"
+        android:textSize="10pt">
+    </TextView>
+    <Spinner
+        android:id="@+id/occopassion"
+        android:layout_height="wrap_content"
+        android:prompt="@string/feedbacktype"
+        android:layout_width="fill_parent"
+        android:entries="@array/loginmethod">
+    </Spinner>
+
+
 </LinearLayout>

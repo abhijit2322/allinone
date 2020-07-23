@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.abhijit.allinone.model.FirebaseDBModel_Provider;
@@ -30,6 +31,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
 
     EditText etPhone, etOtp;
     Button btSendOtp, btResendOtp, btVerifyOtp;
+    Spinner occpas_spinner;
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
@@ -50,6 +52,8 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
         btSendOtp = findViewById(R.id.bt_send_otp);
         btResendOtp = findViewById(R.id.bt_resend_otp);
         btVerifyOtp = findViewById(R.id.bt_verify_otp);
+
+        occpas_spinner=findViewById(R.id.gender_spinner);
         btResendOtp.setOnClickListener(this);
         btVerifyOtp.setOnClickListener(this);
         btSendOtp.setOnClickListener(this);
@@ -81,7 +85,8 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_send_otp:
-                System.out.println("Abhijit The phone Number...."+etPhone.getText().toString());
+                String occopastion=occpas_spinner.getSelectedItem().toString();
+                System.out.println("Abhijit The phone Number...."+etPhone.getText().toString()+"   "+occopastion);
                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
                         etPhone.getText().toString(),        // Phone number to verify
                         1,                 // Timeout duration
@@ -89,11 +94,15 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                         this,               // Activity (for callback binding)
                         mCallbacks);
 
+
                 break;
             case R.id.bt_resend_otp:
                 break;
             case R.id.bt_verify_otp:
+                String occopastion_onverify=occpas_spinner.getSelectedItem().toString();
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, etOtp.getText().toString());
+
+                System.out.println("Abhijit The phone Number...."+etPhone.getText().toString()+"   "+occopastion_onverify);
                 mAuth.signInWithCredential(credential)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override

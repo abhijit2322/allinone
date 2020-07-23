@@ -1,7 +1,8 @@
 package com.abhijit.allinone;
 
 public class UserDetails {
-    static String username = "";
-    static String password = "";
-    static String chatWith = "";
+
+    public static String username = "";
+    public static String password = "";
+    public static String chatWith = "";
 }

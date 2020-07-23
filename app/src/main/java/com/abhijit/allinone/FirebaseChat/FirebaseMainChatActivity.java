@@ -79,6 +79,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.abhijit.allinone.UserDetails;
+
 
 public class FirebaseMainChatActivity extends AppCompatActivity {
 
@@ -120,7 +122,7 @@ public class FirebaseMainChatActivity extends AppCompatActivity {
     StorageReference photoReference;
    private FirebaseRemoteConfig mRemoteConfig;
 
-    String REGISTER_NUMBER="93430771993";
+    String REGISTER_NUMBER= UserDetails.username;//"93430771993";
 
     //Firebase reference1, reference2,reference_photo1,reference_photo2;
     //String FIREBASE_URL="https://allinone-2ecf2.firebaseio.com/";
@@ -131,7 +133,7 @@ public class FirebaseMainChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_firebase_chat);
 
-        mUsername = ANONYMOUS;
+        mUsername =  UserDetails.chatWith;//ANONYMOUS;
         Firebase.setAndroidContext(this);
 
         //Initializing Firebase Object

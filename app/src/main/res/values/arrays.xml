@@ -29,4 +29,9 @@
 
     </string-array>
 
+    <string-array name="loginmethod">
+    <item>@string/service_provider</item>
+        <item>@string/customer</item>
+    </string-array>
+
 </resources>

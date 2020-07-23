@@ -14,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abhijit.allinone.FirebaseChat.FirebaseMainChatActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -149,7 +150,7 @@ public class OnlinePresentUser extends AppCompatActivity {
                 UserDetails.chatWith = al.get(position);
                 UserDetails.username=REGISTER_NUMBER;
                 Toast.makeText(OnlinePresentUser.this, "user selected to chat"+UserDetails.chatWith, Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(OnlinePresentUser.this, ChatWithContacts.class));
+                startActivity(new Intent(OnlinePresentUser.this, FirebaseMainChatActivity.class));
             }
         });
 
