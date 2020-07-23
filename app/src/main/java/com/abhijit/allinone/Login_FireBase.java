@@ -93,8 +93,6 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                         TimeUnit.MINUTES,   // Unit of timeout
                         this,               // Activity (for callback binding)
                         mCallbacks);
-
-
                 break;
             case R.id.bt_resend_otp:
                 break;
