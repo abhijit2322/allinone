@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.abhijit.allinone">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <!-- <activity android:name=".DashBoard"> -->
-        <activity android:name=".ImageGrid">
+        <activity android:name=".FirebaseChat.FirebaseMainChatActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,10 +27,16 @@
         <activity android:name=".DashBoard" />
         <activity android:name=".ImageAdapter" />
         <activity android:name=".TrackProvider" />
-        <activity android:name=".ProcessCitizenRequest"/>
+        <activity android:name=".ProcessCitizenRequest" />
         <activity android:name=".ChatWithContacts" />
         <activity android:name=".FirebaseRealtime" />
-         <activity android:name=".OnlinePresentUser"/>
+        <activity android:name=".OnlinePresentUser" />
+        <activity android:name=".ImageGrid" />
+        <activity android:name=".ImageUpload" />
+        <!-- <activity android:name=".DisplayImagesActivity"/>-->
+        <activity android:name=".DownloadImageFB" />
+        <activity android:name=".DisplayImagesActivity"/>
+       <!--  <<activity android:name=".FirebaseChat.FirebaseMainChatActivity"/> -->
     </application>
 
 </manifest>

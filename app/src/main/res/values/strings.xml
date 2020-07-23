@@ -33,6 +33,7 @@
     <string name="household_paper_work">"Electricity..Mobile...Gas-filling.."</string>
     <string name="serviceprovder_houshold">Houshold Service Provider</string>
     <string name="painter">Painter</string>
+    <string name="sign_out">Sign Out</string>
 
 
 </resources>
