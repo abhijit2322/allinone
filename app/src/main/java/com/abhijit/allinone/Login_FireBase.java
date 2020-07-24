@@ -3,11 +3,13 @@ package com.abhijit.allinone;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -30,12 +32,14 @@ import java.util.concurrent.TimeUnit;
 public class Login_FireBase extends AppCompatActivity implements View.OnClickListener {
 
     EditText etPhone, etOtp;
-    Button btSendOtp, btResendOtp, btVerifyOtp;
+    //Button btSendOtp, btResendOtp, btVerifyOtp;
+    ImageButton btSendOtp, btResendOtp, btVerifyOtp;
     Spinner occpas_spinner;
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     String mVerificationId;
+    String occopastion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +54,10 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
         etPhone = findViewById(R.id.et_phone);
         etOtp = findViewById(R.id.et_otp);
         btSendOtp = findViewById(R.id.bt_send_otp);
-        btResendOtp = findViewById(R.id.bt_resend_otp);
-        btVerifyOtp = findViewById(R.id.bt_verify_otp);
+       // btResendOtp = findViewById(R.id.bt_resend_otp);
+       // btVerifyOtp = findViewById(R.id.bt_verify_otp);
+        btResendOtp = findViewById(R.id.resend);
+        btVerifyOtp = findViewById(R.id.verified);
 
         occpas_spinner=findViewById(R.id.occopassion);
         btResendOtp.setOnClickListener(this);
@@ -85,22 +91,34 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_send_otp:
-                String occopastion=occpas_spinner.getSelectedItem().toString();
+                occopastion=occpas_spinner.getSelectedItem().toString();
                 System.out.println("Abhijit The phone Number...."+etPhone.getText().toString()+"   "+occopastion);
+                String Phonenumber="+91"+etPhone.getText().toString();
+
+                if (etPhone.getText().toString().isEmpty()||occopastion.isEmpty())
+                {
+                    return;
+                }
                 PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                        etPhone.getText().toString(),        // Phone number to verify
+                        Phonenumber,//etPhone.getText().toString(),        // Phone number to verify
                         1,                 // Timeout duration
                         TimeUnit.MINUTES,   // Unit of timeout
                         this,               // Activity (for callback binding)
                         mCallbacks);
                 break;
-            case R.id.bt_resend_otp:
+            case R.id.resend:
                 break;
-            case R.id.bt_verify_otp:
-                String occopastion_onverify=occpas_spinner.getSelectedItem().toString();
+            case R.id.verified:
+                occopastion=occpas_spinner.getSelectedItem().toString();
+
+                if (etOtp.getText().toString().isEmpty()||occopastion.isEmpty())
+                {
+                    return;
+                }
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, etOtp.getText().toString());
 
-                System.out.println("Abhijit The phone Number...."+etPhone.getText().toString()+"   "+occopastion_onverify);
+                System.out.println("Abhijit The phone Number...."+etPhone.getText().toString()+"   "+occopastion);
+
                 mAuth.signInWithCredential(credential)
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -109,6 +127,16 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                                     FirebaseUser user = task.getResult().getUser();
                                     Toast.makeText(Login_FireBase.this, "Verification Success", Toast.LENGTH_SHORT).show();
                                     addNewContact(user.getPhoneNumber());
+                                    if (occopastion.contains("Service Provider"))
+                                    {
+                                        finish();
+                                        startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
+                                    }
+                                    else
+                                    {
+                                        finish();
+                                        startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
+                                    }
                                 } else {
                                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                         Toast.makeText(Login_FireBase.this, "Verification Failed, Invalid credentials", Toast.LENGTH_SHORT).show();
@@ -133,6 +161,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
         pbdata.setAddress("dummy");
         pbdata.setContact_number(phNo);
         pbdata.setIsonline(true);
+        pbdata.setOccupassion(occopastion);
 
         db.collection("PhoneBook").document("Contacts").set(pbdata)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

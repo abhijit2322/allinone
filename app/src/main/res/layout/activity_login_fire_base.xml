@@ -14,21 +14,45 @@ tools:context=".Login_FireBase">
     android:layout_marginTop="22dp"
     android:ems="10"
     android:inputType="phone"
+
     android:hint="Enter phone number" />
 
-<Button
-    android:id="@+id/bt_send_otp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="15dp"
-    android:text="Send Otp" />
+<!--<Button-->
+<!--    android:id="@+id/bt_send_otp"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_marginTop="15dp"-->
+<!--    android:text="Send Otp" />-->
 
-<Button
-    android:id="@+id/bt_resend_otp"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="15dp"
-    android:text="Resend OTP" />
+
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp" >
+        <ImageButton
+            android:id="@+id/bt_send_otp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_toRightOf="@+id/et_phone"
+            android:background="@drawable/otp_send" />
+
+
+        <ImageButton
+            android:id="@+id/resend"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/resend" />
+    </TableRow>
+
+    <!-- <Button
+     android:id="@+id/bt_resend_otp"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:layout_marginTop="15dp"
+     android:text="Resend OTP" />-->
 
 <EditText
     android:id="@+id/et_otp"
@@ -39,12 +63,19 @@ tools:context=".Login_FireBase">
     android:inputType="number"
     android:hint="Enter verification OTP" />
 
-<Button
+<!--<Button
     android:id="@+id/bt_verify_otp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="15dp"
-    android:text="Verify OTP" />
+    android:text="Verify OTP" />-->
+
+    <ImageButton
+        android:id="@+id/verified"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/verified" />
+
 
     <TextView
         android:id="@+id/TextViewTitle5"
@@ -56,10 +87,11 @@ tools:context=".Login_FireBase">
     <Spinner
         android:id="@+id/occopassion"
         android:layout_height="wrap_content"
-        android:prompt="@string/feedbacktype"
+        android:prompt="@string/occupation_selector"
         android:layout_width="fill_parent"
         android:entries="@array/loginmethod">
     </Spinner>
+
 
 
 </LinearLayout>
