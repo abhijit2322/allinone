@@ -17,6 +17,10 @@ package com.abhijit.allinone.FirebaseChat;
 
 public class FriendlyMessage {
 
+
+
+
+    private String to_number;
     private String text;
     private String name;
     private String photoUrl;
@@ -24,10 +28,11 @@ public class FriendlyMessage {
     public FriendlyMessage() {
     }
 
-    public FriendlyMessage(String text, String name, String photoUrl) {
+    public FriendlyMessage(String text, String name, String photoUrl,String to_number) {
         this.text = text;
         this.name = name;
         this.photoUrl = photoUrl;
+        this.to_number=to_number;
     }
 
     public String getText() {
@@ -53,4 +58,14 @@ public class FriendlyMessage {
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
+
+    public String getTo_number() {
+        return to_number;
+    }
+
+    public void setTo_number(String to_number) {
+        this.to_number = to_number;
+    }
+
+
 }

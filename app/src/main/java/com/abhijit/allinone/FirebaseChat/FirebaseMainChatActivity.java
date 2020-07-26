@@ -76,6 +76,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -123,6 +124,7 @@ public class FirebaseMainChatActivity extends AppCompatActivity {
    private FirebaseRemoteConfig mRemoteConfig;
 
     String REGISTER_NUMBER= UserDetails.username;//"93430771993";
+    String TO_NUMBER=UserDetails.chatWith;
 
     //Firebase reference1, reference2,reference_photo1,reference_photo2;
     //String FIREBASE_URL="https://allinone-2ecf2.firebaseio.com/";
@@ -218,7 +220,7 @@ public class FirebaseMainChatActivity extends AppCompatActivity {
 
                 if(!messageText.equals("")){
 
-                    FriendlyMessage message = new FriendlyMessage(mMessageEditText.getText().toString(), REGISTER_NUMBER, null);
+                    FriendlyMessage message = new FriendlyMessage(mMessageEditText.getText().toString(), REGISTER_NUMBER, null,TO_NUMBER);
                     mFirebaseReference.push().setValue(message);
                     mMessageEditText.setText("");
 
@@ -244,9 +246,47 @@ public class FirebaseMainChatActivity extends AppCompatActivity {
         mFirebaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
                 FriendlyMessage friendlyMessage = snapshot.getValue(FriendlyMessage.class);
+
+                if(snapshot.exists()) {
+
+                    Toast.makeText(FirebaseMainChatActivity.this,"Number already exists",Toast.LENGTH_SHORT).show();
+                    FriendlyMessage friendlyMessage1 = snapshot.getValue(FriendlyMessage.class);
+                    mMessageAdapter.add(friendlyMessage);
+                    return;
+
+                }
+                FriendlyMessage friendlyMessage1 = snapshot.getValue(FriendlyMessage.class);
                 System.out.println("This is where the problem is addChildEventListener  >>>>>...."+friendlyMessage.getPhotoUrl()+" text is >>>>>"+friendlyMessage.getText());
-                mMessageAdapter.add(friendlyMessage);
+
+                Iterable<DataSnapshot> snapshotIterator = snapshot.getChildren();
+                Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
+
+                while (iterator.hasNext())
+                {
+                    DataSnapshot next = (DataSnapshot) iterator.next();
+                    String Cnumber= (String)next.child("to_number").getValue();
+                    if(friendlyMessage.getTo_number()!=null)
+                    {
+                        FriendlyMessage frnmsge=new FriendlyMessage("","",""," ");
+                        mMessageAdapter.add(frnmsge);
+                        break;
+                    }
+
+
+                }
+                FriendlyMessage message = new FriendlyMessage(null, mUsername,null,TO_NUMBER);
+                FriendlyMessage frnmsge=new FriendlyMessage("","",""," ");
+                mMessageAdapter.add(frnmsge);
+
+              /* if(friendlyMessage.getTo_number().equals(TO_NUMBER))
+                    mMessageAdapter.add(friendlyMessage);
+               else
+               {
+                   FriendlyMessage message = new FriendlyMessage(null, mUsername,null,TO_NUMBER);
+                   mMessageAdapter.add(friendlyMessage);
+               }*/
             }
 
             @Override
@@ -341,7 +381,7 @@ public class FirebaseMainChatActivity extends AppCompatActivity {
                            @Override
                            public void onSuccess(Uri uri) {
                                String downloadUrl = uri.toString();
-                               FriendlyMessage message = new FriendlyMessage(null, mUsername, downloadUrl.toString());
+                               FriendlyMessage message = new FriendlyMessage(null, mUsername, downloadUrl.toString(),TO_NUMBER);
                                mFirebaseReference.push().setValue(message);
                                //Do what you need to do with url
                            }
@@ -386,7 +426,7 @@ public class FirebaseMainChatActivity extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         System.out.println("This is where the problem is uploadCameraFile");
                         String downloadUrl = uri.toString();
-                        FriendlyMessage message = new FriendlyMessage(null, mUsername, downloadUrl.toString());
+                        FriendlyMessage message = new FriendlyMessage(null, mUsername, downloadUrl.toString(),TO_NUMBER);
                         mFirebaseReference.push().setValue(message);
 
                     }
