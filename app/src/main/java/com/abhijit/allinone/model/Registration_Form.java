@@ -13,6 +13,17 @@ public class Registration_Form {
         String gender;
         String skill;
         String ran_cust;
+        String charge;
+
+    public String getCharge() {
+        return charge;
+    }
+
+    public void setCharge(String charge) {
+        this.charge = charge;
+    }
+
+
 
     public String getName() {
         return name;

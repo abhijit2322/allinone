@@ -74,7 +74,7 @@ public class Display_Sms_Call extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_sms_call);
 
-        AppGlobalSetting.occopassion="Doctor";
+        //AppGlobalSetting.occopassion="Doctor";
         al=read_FirebaseData();
 
 

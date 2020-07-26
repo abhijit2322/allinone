@@ -28,9 +28,10 @@ import java.util.Random;
 
 public class RegistrationForm extends AppCompatActivity {
 
+    private static final String TAG = "FirebaseRealtime";
 
     EditText reg_name,reg_designation,reg_address,reg_contact_number,reg_email_address,reg_com_address,
-            reg_exp,reg_company_address,reg_about_me;
+            reg_exp,reg_company_address,reg_about_me,reg_charge;
     Button register;
     Spinner gender_spinner,skill_spinner;
 
@@ -38,6 +39,8 @@ public class RegistrationForm extends AppCompatActivity {
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDbRef;
     private String userId;
+    private FirebaseDatabase mDatabase1;
+    private DatabaseReference mDbRef1;
 
 
     @Override
@@ -59,6 +62,7 @@ public class RegistrationForm extends AppCompatActivity {
         reg_exp=findViewById(R.id.reg_exp);
         reg_company_address=findViewById(R.id.reg_company_address);
         reg_about_me=findViewById(R.id.reg_about_me);
+        reg_charge=findViewById(R.id.reg_charge);
         register=findViewById(R.id.register);
         gender_spinner=findViewById(R.id.gender_spinner);
         skill_spinner=findViewById(R.id.skill_spinner);
@@ -77,12 +81,13 @@ public class RegistrationForm extends AppCompatActivity {
         String experience = reg_exp.getText().toString();
         String company_address = reg_company_address.getText().toString();
         String about_me = reg_about_me.getText().toString();
+        String charge=reg_charge.getText().toString();
         String gender=gender_spinner.getSelectedItem().toString();
         String skill=skill_spinner.getSelectedItem().toString();
 
         userId=contact_number;
 
-        if(name.isEmpty()||address.isEmpty()||contact_number.isEmpty()||gender.isEmpty()||skill.isEmpty())
+        if(name.isEmpty()||address.isEmpty()||contact_number.isEmpty()||gender.isEmpty()||skill.isEmpty()||charge.isEmpty())
         {
             Toast.makeText(RegistrationForm.this, "Enter missing information", Toast.LENGTH_SHORT).show();
         }
@@ -105,7 +110,9 @@ public class RegistrationForm extends AppCompatActivity {
             i.putExtra("gender",gender);
             i.putExtra("skill",skill);
             i.putExtra("cust_id",ran_cust);
+            i.putExtra("charges",charge);
             Save_RegisterData();
+            save_profdetails();
             startActivity(i);
         }
 
@@ -128,6 +135,7 @@ public class RegistrationForm extends AppCompatActivity {
         pbdata.setRan_cust(ran_cust);
         pbdata.setGender(gender_spinner.getSelectedItem().toString());
         pbdata.setSkill(skill_spinner.getSelectedItem().toString());
+        pbdata.setCharge(reg_charge.getText().toString());
 
         mDbRef.child(userId).setValue(pbdata);
 
@@ -147,5 +155,33 @@ public class RegistrationForm extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void save_profdetails()
+    {
+        mDatabase = FirebaseDatabase.getInstance();
+        mDbRef = mDatabase.getReference("ServiceProvider/PhoneNumber");
+        String userId = reg_contact_number.getText().toString();
+
+        FirebaseDBModel_Provider user = new FirebaseDBModel_Provider(reg_name.getText().toString(),reg_contact_number.getText().toString(),reg_address.getText().toString(),skill_spinner.getSelectedItem().toString(),true,reg_charge.getText().toString());
+
+        mDbRef.child(userId).setValue(user);
+
+        mDbRef.child(userId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                FirebaseDBModel_Provider user = dataSnapshot.getValue(FirebaseDBModel_Provider.class);
+
+                Log.d(TAG, "User name>>>> : " + user.getName() + ", contactnumber  " + user.getContact_number() +"On Line Status:"+user.isIsonline());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+// Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
     }
 }

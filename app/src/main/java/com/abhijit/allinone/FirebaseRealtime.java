@@ -34,7 +34,7 @@ public class FirebaseRealtime extends AppCompatActivity {
         //String userId = mDbRef.push().getKey();
 // creating user object
         String userId = "83430771990";
-        FirebaseDBModel_Provider user = new FirebaseDBModel_Provider("Hillary5","83430771990","Agaratla","Painter",false);
+        FirebaseDBModel_Provider user = new FirebaseDBModel_Provider("Hillary5","83430771990","Agaratla","Painter",false,"200");
 
         mDbRef.child(userId).setValue(user);
 

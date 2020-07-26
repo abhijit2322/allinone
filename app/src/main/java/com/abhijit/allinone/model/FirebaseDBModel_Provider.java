@@ -7,15 +7,23 @@ public class FirebaseDBModel_Provider {
     String contact_number;
     String address;
     boolean isonline;
+    String charge;
 
-    public FirebaseDBModel_Provider(String name, String contact_number, String address,String occupassion, boolean isonline) {
+    public FirebaseDBModel_Provider(String name, String contact_number, String address,String occupassion, boolean isonline,String charge) {
         this.name = name;
         this.contact_number = contact_number;
         this.address = address;
         this.occupassion=occupassion;
         this.isonline = isonline;
+        this.charge=charge;
+    }
+    public String getCharge() {
+        return charge;
     }
 
+    public void setCharge(String charge) {
+        this.charge = charge;
+    }
     public String getOccupassion() {
         return occupassion;
     }

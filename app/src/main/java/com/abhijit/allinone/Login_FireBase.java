@@ -76,12 +76,14 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
             public void onVerificationFailed(FirebaseException e) {
                 System.out.println("Abhijit Verification failed message.."+e.getMessage());
                 Toast.makeText(Login_FireBase.this, "Verification Failed", Toast.LENGTH_SHORT).show();
+
+
             }
 
             @Override
             public void onCodeSent(String verificationId,
                                    PhoneAuthProvider.ForceResendingToken token) {
-                System.out.println("Abhijit verification failed message.."+token.toString());
+                System.out.println("Abhijit verification failed token.."+token.toString());
                 Toast.makeText(Login_FireBase.this, "Code Sent", Toast.LENGTH_SHORT).show();
                 mVerificationId = verificationId;
             }
@@ -94,6 +96,22 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                 occopastion=occpas_spinner.getSelectedItem().toString();
                 System.out.println("Abhijit The phone Number...."+etPhone.getText().toString()+"   "+occopastion);
                 String Phonenumber="+91"+etPhone.getText().toString();
+
+
+                //////testing purpose
+                if (occopastion.contains("Service Provider"))
+                {
+                    // finish();
+                    startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
+                }
+                else
+                {
+                    // finish();
+                    startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
+                }
+
+//////testing purpose
+
 
                 if (etPhone.getText().toString().isEmpty()||occopastion.isEmpty())
                 {
@@ -141,6 +159,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                         Toast.makeText(Login_FireBase.this, "Verification Failed, Invalid credentials", Toast.LENGTH_SHORT).show();
                                     }
+
                                 }
                             }
                         });

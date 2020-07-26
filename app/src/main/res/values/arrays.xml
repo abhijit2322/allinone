@@ -3,30 +3,49 @@
     <string-array name="gender">
         <item>@string/male</item>
         <item>@string/female</item>
-        <item>@string/other</item>
     </string-array>
 
-    <string-array name="skils">
-        <item>@string/doctor</item>
-        <item>@string/nurse</item>
-        <item>@string/medical_service_provider</item>
-        <item>@string/electician</item>
-        <item>@string/plumber</item>
-        <item>@string/medical_service_provider</item>
-        <item>@string/medicine_shop_owner</item>
-        <item>@string/vegitable_shop_owner</item>
-        <item>@string/medical_service_provider</item>
-        <item>@string/meat_fish_shop_owner</item>
-        <item>@string/grocery_shop_owner</item>
-        <item>@string/entertain</item>
-        <item>@string/germents_shop_owner</item>
-        <item>@string/household_paper_work</item>
-        <item>@string/painter</item>
-        <item>@string/painting_shop_owner</item>
-        <item>@string/hardware_shop_owner</item>
-        <item>@string/book_shop_owner</item>
-        <item>@string/serviceprovder_houshold</item>
 
+
+    <string-array name="skils">
+        <item>@string/ENT1</item>
+        <item>@string/ENT2</item>
+        <item>@string/ENT3</item>
+        <item>@string/ENT4</item>
+        <item>@string/ENT5</item>
+        <item>@string/ENT6</item>
+        <item>@string/HOU1</item>
+        <item>@string/HOU2</item>
+        <item>@string/HOU3</item>
+        <item>@string/HOU4</item>
+        <item>@string/HOU5</item>
+        <item>@string/HOU6</item>
+        <item>@string/HOU7</item>
+        <item>@string/HOU8</item>
+        <item>@string/HOU9</item>
+        <item>@string/HOU10</item>
+        <item>@string/MED1</item>
+        <item>@string/MED2</item>
+        <item>@string/MED3</item>
+        <item>@string/MED4</item>
+        <item>@string/MED7</item>
+        <item>@string/EDU1</item>
+        <item>@string/EDU2</item>
+        <item>@string/EDU3</item>
+        <item>@string/EDU4</item>
+        <item>@string/CON1</item>
+        <item>@string/CON2</item>
+        <item>@string/CON3</item>
+        <item>@string/CON4</item>
+        <item>@string/CON5</item>
+        <item>@string/CON6</item>
+        <item>@string/CON7</item>
+        <item>@string/CON8</item>
+        <item>@string/IND1</item>
+        <item>@string/IND2</item>
+        <item>@string/IND3</item>
+        <item>@string/IND4</item>
+        <item>@string/IND5</item>
     </string-array>
 
     <string-array name="loginmethod">
