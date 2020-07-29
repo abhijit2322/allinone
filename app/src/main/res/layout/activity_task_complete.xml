@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    tools:context=".Login_FireBase">
+
+
+    <TextView
+        android:id="@+id/TextViewTitle5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="To complete the task enter the otp recived my Customer..."
+        android:textSize="10pt">
+    </TextView>
+
+
+    <EditText
+        android:id="@+id/et_otp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="6"
+        android:inputType="number"
+        android:hint="Enter verification OTP" />
+
+    <!--<Button
+        android:id="@+id/bt_verify_otp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Verify OTP" />-->
+
+    <ImageButton
+        android:id="@+id/verified"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@drawable/verified" />
+
+
+
+
+
+
+
+</LinearLayout>

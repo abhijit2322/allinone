@@ -3,6 +3,7 @@ package com.abhijit.allinone;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,7 @@ public class CustomList extends ArrayAdapter<String>{
        // imageView1.setImageResource(imageId1[position]);
         //imageView2.setImageResource(imageId2[position]);
 
-        imageView1.setOnClickListener(new View.OnClickListener() {
+        imageView2.setOnClickListener(new View.OnClickListener() {
             String s = "SMS "+web.get(positionG);;//imageId1[positionG];
             @Override
             public void onClick(View v) {
@@ -67,10 +68,24 @@ public class CustomList extends ArrayAdapter<String>{
             }
         });
 
-        imageView2.setOnClickListener(new View.OnClickListener() {
+        imageView1.setOnClickListener(new View.OnClickListener() {
             String s = "Call "+web.get(positionG);//items[position];
+
             @Override
             public void onClick(View v) {
+                UserDetails.chatWith = web.get(positionG);
+                Uri u = Uri.parse("tel:" + UserDetails.chatWith);
+
+                try
+                {
+                    context.startActivity(new Intent(Intent.ACTION_DIAL,u));
+                }
+                catch (SecurityException s)
+                {
+                    Toast.makeText(context, s.getMessage(), Toast.LENGTH_LONG)
+                            .show();
+                }
+
                 Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
             }
         });

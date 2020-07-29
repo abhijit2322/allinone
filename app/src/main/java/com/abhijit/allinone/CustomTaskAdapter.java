@@ -121,7 +121,7 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
                 selectedTaskName=s;//web.get(positionG);
                 Update_Task("false",selectedTaskName);
 
-                context.startActivity(new Intent(context, TaskAssignment.class));
+                context.startActivity(new Intent(context, TaskComplete.class));
                 context.finish();
             }
         });
