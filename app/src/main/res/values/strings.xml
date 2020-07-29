@@ -39,14 +39,14 @@
     <string name="customer">Citizent</string>
 
 
-<!-- ent-->
+    <!-- ent-->
     <string name="ENT1"> Cinema/Events Support</string>
     <string name="ENT2"> Light Food Service</string>
     <string name="ENT3"> Bill Submission</string>
     <string name="ENT4"> Gym</string>
     <string name="ENT5"> Car Rent</string>
     <string name="ENT6"> Pension Service</string>
-<!--  hous -->
+    <!--  hous -->
     <string name="HOU1"> Painter</string>
     <string name="HOU2"> Plumbing</string>
     <string name="HOU3"> Electrician</string>
@@ -57,7 +57,7 @@
     <string name="HOU8"> Pension Service</string>
     <string name="HOU9"> House Cleaning</string>
     <string name="HOU10"> Iron dress</string>
-<!-- construction -->
+    <!-- construction -->
     <string name="CON1"> Contructor</string>
     <string name="CON2"> Sand Shop</string>
     <string name="CON3"> Painting shop</string>
@@ -66,7 +66,7 @@
     <string name="CON6"> Wood Shop</string>
     <string name="CON7"> Glass Shop</string>
     <string name="CON8"> Iron Shop</string>
- <!-- medical -->
+    <!-- medical -->
     <string name="MED1"> Test Centre</string>
     <string name="MED2"> Home Medical Support</string>
     <string name="MED3"> Doctor</string>
@@ -74,7 +74,7 @@
     <string name="MED5"> Hospital</string>
     <string name="MED6"> Ambulance Booking</string>
     <string name="MED7"> Medicine Shop</string>
-  <!-- EDU -->
+    <!-- EDU -->
     <string name="EDU1"> Tutions</string>
     <string name="EDU2"> On line Tution</string>
     <string name="EDU3"> Book Stoll</string>
@@ -85,13 +85,6 @@
     <string name="IND3"> Vegitable Shop</string>
     <string name="IND4"> Meet Shop</string>
     <string name="IND5"> Fish Shop</string>
-
-
-
-
-
-
-
 
 
 </resources>

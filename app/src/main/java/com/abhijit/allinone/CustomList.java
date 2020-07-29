@@ -48,8 +48,8 @@ public class CustomList extends ArrayAdapter<String>{
         System.out.println("The List text is "+web.get(position));
         txtTitle.setText(web.get(position));
 
-        imageView1.setImageResource(imageId1[position]);
-        imageView2.setImageResource(imageId2[position]);
+       // imageView1.setImageResource(imageId1[position]);
+        //imageView2.setImageResource(imageId2[position]);
 
         imageView1.setOnClickListener(new View.OnClickListener() {
             String s = "SMS "+web.get(positionG);;//imageId1[positionG];

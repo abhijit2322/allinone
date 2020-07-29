@@ -49,23 +49,23 @@ public class Display_Sms_Call extends AppCompatActivity {
             "Drupal"
     } ;
     Integer[] imageId1 = {
-            R.drawable.chat,
-            R.drawable.chat,
-            R.drawable.chat,
-            R.drawable.chat,
-            R.drawable.chat,
-            R.drawable.chat,
-            R.drawable.chat
+            R.drawable.chat1,
+            R.drawable.chat1,
+            R.drawable.chat1,
+            R.drawable.chat1,
+            R.drawable.chat1,
+            R.drawable.chat1,
+            R.drawable.chat1
 
     };
     Integer[] imageId2 = {
-            R.drawable.call,
-            R.drawable.call,
-            R.drawable.call,
-            R.drawable.call,
-            R.drawable.call,
-            R.drawable.call,
-            R.drawable.call
+            R.drawable.call1,
+            R.drawable.call1,
+            R.drawable.call1,
+            R.drawable.call1,
+            R.drawable.call1,
+            R.drawable.call1,
+            R.drawable.call1
 
     };
 
