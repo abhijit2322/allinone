@@ -145,8 +145,10 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                                     FirebaseUser user = task.getResult().getUser();
                                     Toast.makeText(Login_FireBase.this, "Verification Success", Toast.LENGTH_SHORT).show();
                                     addNewContact(user.getPhoneNumber());
+                                    AppGlobalSetting.login_category=occopastion;
                                     if (occopastion.contains("Service Provider"))
                                     {
+
                                         finish();
                                         startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
                                     }

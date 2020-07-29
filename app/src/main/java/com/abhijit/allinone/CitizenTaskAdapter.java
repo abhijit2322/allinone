@@ -11,6 +11,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+
+import android.app.Activity;
+import android.content.Intent;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.abhijit.allinone.FirebaseChat.FirebaseMainChatActivity;
 
 import java.util.ArrayList;
@@ -39,12 +61,11 @@ import java.util.Iterator;
 
 import static android.app.Activity.RESULT_OK;
 
-public class CustomTaskAdapter extends ArrayAdapter<String> {
+public class CitizenTaskAdapter extends ArrayAdapter<String> {
     private static final String TAG = "CustomTaskAdapter";
     private final Activity context;
     //private final String[] web;
-    private final Integer[] imageId1;
-    private final Integer[] imageId2;
+
     public int positionG=0;
     ArrayList<String> web = new ArrayList<>();
     String REGISTER_NUMBER="93430771993";
@@ -64,34 +85,30 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
     {
 
     }
-    public CustomTaskAdapter(Activity context,
-                      ArrayList<String> web, Integer[] imageId1,Integer[] imageId2) {
+    public CitizenTaskAdapter(Activity context,
+                             ArrayList<String> web) {
 
 
-            super(context, R.layout.task_custom_adapter, web);
-            this.context = context;
+        super(context, R.layout.task_citizen_adapter, web);
+        this.context = context;
         this.web = web;
-            this.imageId1 = imageId1;
-            this.imageId2 = imageId2;
+
     }
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView= inflater.inflate(R.layout.task_custom_adapter, null, true);
+        View rowView= inflater.inflate(R.layout.task_citizen_adapter, null, true);
         TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
-
-        ImageView imageView1 = (ImageView) rowView.findViewById(R.id.img1);
-        ImageView imageView2 = (ImageView) rowView.findViewById(R.id.img2);
 
         positionG=position;
 
-       // System.out.println("The List text is "+web.get(position));
+        // System.out.println("The List text is "+web.get(position));
         txtTitle.setText(web.get(position));
 
         // imageView1.setImageResource(imageId1[position]);
         //imageView2.setImageResource(imageId2[position]);
 
-        imageView1.setOnClickListener(new View.OnClickListener() {
+       /* imageView1.setOnClickListener(new View.OnClickListener() {
             String s = web.get(positionG);;//imageId1[positionG];
             @Override
             public void onClick(View v) {
@@ -110,9 +127,9 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
                 //Intent intent = getIntent();//TaskAssignment
 
             }
-        });
+        });*/
 
-        imageView2.setOnClickListener(new View.OnClickListener() {
+       /* imageView2.setOnClickListener(new View.OnClickListener() {
             String s = web.get(positionG);//items[position];
 
             @Override
@@ -124,7 +141,7 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
                 context.startActivity(new Intent(context, TaskAssignment.class));
                 context.finish();
             }
-        });
+        });*/
 
 
         return rowView;
@@ -165,7 +182,7 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
                             Log.i(TAG, "Abhijit >> sub Task value  present  "+Taskname+"  selected task:  "+taskNameUpdate+"  "+final_next.toString());
                             mDbRef=final_next.getRef();
                             if(updateValue.equals("true")) {
-                                 mDbRef.child("accept_reject").setValue(true);
+                                mDbRef.child("accept_reject").setValue(true);
                                 // mDbRef.child(final_next).child()
                             }
                             if(updateValue.equals("false")) {

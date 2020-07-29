@@ -110,7 +110,7 @@ public class TaskAssignment extends AppCompatActivity {
 
         taskList = new ArrayList<>();
 
-
+        AppGlobalSetting.login_category="Citizen";
 
         mDatabase = FirebaseDatabase.getInstance();
         mDbRef = mDatabase.getReference("ServiceProvider/TodoList");
@@ -285,11 +285,13 @@ public class TaskAssignment extends AppCompatActivity {
                 //Log.d(TAG, " Total Tasks are >>>>55555555 "+taskList);
                 if(task_number >0){
 
-                    CustomTaskAdapter adapter = new
-                            CustomTaskAdapter(TaskAssignment.this, taskList, imageId1, imageId2);
-                    MTaskListView = (ListView) findViewById(R.id.list_todo);
-                    MTaskListView.setAdapter(adapter);
-                    MTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    if(AppGlobalSetting.login_category.equals("Citizen")){
+                        CitizenTaskAdapter adapter = new
+                                CitizenTaskAdapter(TaskAssignment.this, taskList);
+
+                        MTaskListView = (ListView) findViewById(R.id.list_todo);
+                        MTaskListView.setAdapter(adapter);
+                        MTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view,
@@ -298,6 +300,24 @@ public class TaskAssignment extends AppCompatActivity {
 
                             }
                         });
+                    }
+                    else {
+                        CustomTaskAdapter adapter = new
+                                CustomTaskAdapter(TaskAssignment.this, taskList, imageId1, imageId2);
+
+                        MTaskListView = (ListView) findViewById(R.id.list_todo);
+                        MTaskListView.setAdapter(adapter);
+                        MTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent, View view,
+                                                    int position, long id) {
+                                Toast.makeText(TaskAssignment.this, "You Clicked at " +  position, Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+                    }
+
                 }
 
             }

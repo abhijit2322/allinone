@@ -7,7 +7,7 @@ public class AppGlobalSetting {
 
     static List Main_List = new ArrayList();
     static String occopassion="";
-
+    static String login_category="";
     // Functional and Occopassion code
     /*MAIN MENU*/
     final static String MAIN1="House Hold Work";
