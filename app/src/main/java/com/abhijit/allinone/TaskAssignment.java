@@ -113,7 +113,7 @@ public class TaskAssignment extends AppCompatActivity {
 
         taskList = new ArrayList<>();
 
-        AppGlobalSetting.login_category="Citizen23";
+
 
         mDatabase = FirebaseDatabase.getInstance();
         mDbRef = mDatabase.getReference("ServiceProvider/TodoList");

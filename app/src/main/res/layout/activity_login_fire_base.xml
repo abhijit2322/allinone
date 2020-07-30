@@ -33,17 +33,18 @@ tools:context=".Login_FireBase">
         android:layout_marginTop="15dp" >
         <ImageButton
             android:id="@+id/bt_send_otp"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_toRightOf="@+id/et_phone"
+            android:layout_marginLeft="150dp"
             android:background="@drawable/otp_send" />
 
 
         <ImageButton
             android:id="@+id/resend"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginLeft="40dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
             android:background="@drawable/resend" />
     </TableRow>
 
@@ -72,8 +73,9 @@ tools:context=".Login_FireBase">
 
     <ImageButton
         android:id="@+id/verified"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="150dp"
         android:background="@drawable/verified" />
 
 

@@ -69,6 +69,17 @@ public class Display_Sms_Call extends AppCompatActivity {
 
     };
 
+    Integer[] imageId3 = {
+            R.drawable.call1,
+            R.drawable.call1,
+            R.drawable.call1,
+            R.drawable.call1,
+            R.drawable.call1,
+            R.drawable.call1,
+            R.drawable.call1
+
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,7 +141,7 @@ public class Display_Sms_Call extends AppCompatActivity {
              }
              if(totalUsers>0) {
                  CustomList adapter = new
-                         CustomList(Display_Sms_Call.this, al, imageId1, imageId2);
+                         CustomList(Display_Sms_Call.this, al, imageId1, imageId2,imageId3);
                  list = (ListView) findViewById(R.id.list);
                  list.setAdapter(adapter);
                  list.setOnItemClickListener(new AdapterView.OnItemClickListener() {

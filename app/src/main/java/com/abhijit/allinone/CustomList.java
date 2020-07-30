@@ -25,6 +25,8 @@ public class CustomList extends ArrayAdapter<String> implements View.OnClickList
     //private final String[] web;
     private final Integer[] imageId1;
     private final Integer[] imageId2;
+    private final Integer[] imageId3;
+
     public int positionG=0;
     ArrayList<String> web = new ArrayList<>();
     String REGISTER_NUMBER="93430771993";
@@ -33,12 +35,13 @@ public class CustomList extends ArrayAdapter<String> implements View.OnClickList
 
 
     public CustomList(Activity context,
-                      ArrayList<String> web, Integer[] imageId1,Integer[] imageId2) {
+                      ArrayList<String> web, Integer[] imageId1,Integer[] imageId2,Integer[] imageId3) {
         super(context, R.layout.list_icon, web);
         this.context = context;
         this.web = web;
         this.imageId1 = imageId1;
         this.imageId2 = imageId2;
+        this.imageId3=imageId3;
     }
     @Override
     public View getView(int position, View view, ViewGroup parent) {
@@ -48,6 +51,7 @@ public class CustomList extends ArrayAdapter<String> implements View.OnClickList
 
         ImageView imageView1 = (ImageView) rowView.findViewById(R.id.img1);
         ImageView imageView2 = (ImageView) rowView.findViewById(R.id.img2);
+        ImageView imageView3 = (ImageView) rowView.findViewById(R.id.img3);
 
         positionG=position;
 
@@ -58,11 +62,13 @@ public class CustomList extends ArrayAdapter<String> implements View.OnClickList
         //imageView2.setImageResource(imageId2[position]);
         imageView1.setTag(positionG);
         imageView2.setTag(positionG);
+        imageView3.setTag(positionG);
 
 
 
         imageView1.setOnClickListener(this);
         imageView2.setOnClickListener(this);
+        imageView3.setOnClickListener(this);
 
 
         return rowView;
@@ -89,6 +95,14 @@ public class CustomList extends ArrayAdapter<String> implements View.OnClickList
                 UserDetails.chatWith = object.toString();
                 UserDetails.username=REGISTER_NUMBER;
                 context.startActivity(new Intent(context, FirebaseMainChatActivity.class));
+                break;
+
+            case R.id.img3:
+                System.out.println("The number SMS is "+object.toString()+"Position is "+position);
+                UserDetails.chatWith = object.toString();
+                UserDetails.username=REGISTER_NUMBER;
+                AppGlobalSetting.login_category="Citizen";
+                context.startActivity(new Intent(context, TaskAssignment.class));
                 break;
         }
 
