@@ -138,7 +138,7 @@ public class Display_Sms_Call extends AppCompatActivity {
                      @Override
                      public void onItemClick(AdapterView<?> parent, View view,
                                              int position, long id) {
-                         Toast.makeText(Display_Sms_Call.this, "You Clicked at " + web[+position], Toast.LENGTH_SHORT).show();
+                         Toast.makeText(Display_Sms_Call.this, "You Clicked at " + al.get(position), Toast.LENGTH_SHORT).show();
 
                      }
                  });

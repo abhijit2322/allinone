@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +19,7 @@ import com.abhijit.allinone.FirebaseChat.FirebaseMainChatActivity;
 
 import java.util.ArrayList;
 
-public class CustomList extends ArrayAdapter<String>{
+public class CustomList extends ArrayAdapter<String> implements View.OnClickListener{
 
     private final Activity context;
     //private final String[] web;
@@ -25,6 +28,8 @@ public class CustomList extends ArrayAdapter<String>{
     public int positionG=0;
     ArrayList<String> web = new ArrayList<>();
     String REGISTER_NUMBER="93430771993";
+    TextView txtTitle;
+    View growView;
 
 
     public CustomList(Activity context,
@@ -39,7 +44,7 @@ public class CustomList extends ArrayAdapter<String>{
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.list_icon, null, true);
-        TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
+        txtTitle = (TextView) rowView.findViewById(R.id.txt);
 
         ImageView imageView1 = (ImageView) rowView.findViewById(R.id.img1);
         ImageView imageView2 = (ImageView) rowView.findViewById(R.id.img2);
@@ -51,46 +56,42 @@ public class CustomList extends ArrayAdapter<String>{
 
        // imageView1.setImageResource(imageId1[position]);
         //imageView2.setImageResource(imageId2[position]);
+        imageView1.setTag(positionG);
+        imageView2.setTag(positionG);
 
-        imageView2.setOnClickListener(new View.OnClickListener() {
-            String s = "SMS "+web.get(positionG);;//imageId1[positionG];
-            @Override
-            public void onClick(View v) {
 
-                UserDetails.chatWith = web.get(positionG);
-                UserDetails.username=REGISTER_NUMBER;
-                Intent i =new Intent();
-                //Intent intent = new Intent(context, FirebaseMainChatActivity.class);
-                Toast.makeText(context, "user selected to chat"+UserDetails.chatWith, Toast.LENGTH_SHORT).show();
-                context.startActivity(new Intent(context, FirebaseMainChatActivity.class));
 
-                //Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        imageView1.setOnClickListener(new View.OnClickListener() {
-            String s = "Call "+web.get(positionG);//items[position];
-
-            @Override
-            public void onClick(View v) {
-                UserDetails.chatWith = web.get(positionG);
-                Uri u = Uri.parse("tel:" + UserDetails.chatWith);
-
-                try
-                {
-                    context.startActivity(new Intent(Intent.ACTION_DIAL,u));
-                }
-                catch (SecurityException s)
-                {
-                    Toast.makeText(context, s.getMessage(), Toast.LENGTH_LONG)
-                            .show();
-                }
-
-                Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
-            }
-        });
+        imageView1.setOnClickListener(this);
+        imageView2.setOnClickListener(this);
 
 
         return rowView;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        int position=(Integer) v.getTag();
+        Object object= getItem(position);
+        System.out.println("The number is "+object.toString()+"Position is "+position);
+       // DataModel dataModel=(DataModel)object;
+
+        switch (v.getId()) {
+            case R.id.img1:
+                System.out.println("The number  CALL is "+object.toString()+"Position is "+position);
+                Uri u = Uri.parse("tel:" + object.toString());
+                context.startActivity(new Intent(Intent.ACTION_DIAL,u));
+                break;
+
+            case R.id.img2:
+                System.out.println("The number SMS is "+object.toString()+"Position is "+position);
+                UserDetails.chatWith = object.toString();
+                UserDetails.username=REGISTER_NUMBER;
+                context.startActivity(new Intent(context, FirebaseMainChatActivity.class));
+                break;
+        }
+
+
     }
 }
