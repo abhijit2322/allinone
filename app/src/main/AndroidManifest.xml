@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <!-- <activity android:name=".DashBoard"> -->
-        <activity android:name=".Display_Sms_Call">
+        <activity android:name=".TaskAssignment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,7 +34,7 @@
         <activity android:name=".DownloadImageFB" />
         <activity android:name=".DisplayImagesActivity" />
         <activity android:name=".FirebaseChat.FirebaseMainChatActivity" />
-        <activity android:name=".TaskAssignment" />
+        <activity android:name=".Display_Sms_Call" />
         <activity android:name=".RegistrationForm" />
         <activity android:name=".Login_FireBase" />
         <activity android:name=".TaskComplete"/>

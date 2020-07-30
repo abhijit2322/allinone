@@ -85,16 +85,9 @@ public class TaskComplete extends AppCompatActivity implements View.OnClickListe
     void initFields() {
 
         etOtp = findViewById(R.id.et_otp);
-       // btSendOtp = findViewById(R.id.bt_send_otp);
-        // btResendOtp = findViewById(R.id.bt_resend_otp);
-        // btVerifyOtp = findViewById(R.id.bt_verify_otp);
-       // btResendOtp = findViewById(R.id.resend);
         btVerifyOtp = findViewById(R.id.verified);
-
-        //occpas_spinner=findViewById(R.id.occopassion);
-       // btResendOtp.setOnClickListener(this);
         btVerifyOtp.setOnClickListener(this);
-       // btSendOtp.setOnClickListener(this);
+
     }
     void initFireBaseCallbacks() {
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -125,23 +118,7 @@ public class TaskComplete extends AppCompatActivity implements View.OnClickListe
     public void SendOtpToCitizen()
     {
         String Phonenumber="+91"+REQUEST_CITIZEN_NUMBER;
-
-
-    /*    //////testing purpose
-        if (occopastion.contains("Service Provider"))
-        {
-            // finish();
-            startActivity(new Intent(TaskComplete.this, RegistrationForm.class));
-        }
-        else
-        {
-            // finish();
-            startActivity(new Intent(TaskComplete.this, ImageGrid.class));
-        }
-
-//////testing purpose*/
-
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+       PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 Phonenumber,//etPhone.getText().toString(),        // Phone number to verify
                 1,                 // Timeout duration
                 TimeUnit.MINUTES,   // Unit of timeout

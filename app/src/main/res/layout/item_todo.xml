@@ -17,19 +17,19 @@
         android:id="@+id/task_accept"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignLeft="@+id/task_delete"
+        android:layout_alignLeft="@+id/task_complete"
         android:layout_marginLeft="-51dp"
         android:src="@drawable/accept"
         android:onClick="acceptTask"
         />
 
     <ImageButton
-        android:id="@+id/task_delete"
+        android:id="@+id/task_complete"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="-5dp"
-        android:src="@drawable/reject"
+        android:src="@drawable/task_complete"
         android:onClick="rejectTask"
          />
 

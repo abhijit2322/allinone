@@ -57,6 +57,9 @@ public class TaskAssignment extends AppCompatActivity {
     String sub_folder;
     ArrayList<String> taskList = new ArrayList<>();
 
+    CustomTaskAdapter ser_adapter;
+    CitizenTaskAdapter ci_adapter;
+
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDbRef;
 
@@ -85,13 +88,13 @@ public class TaskAssignment extends AppCompatActivity {
 
     };
     Integer[] imageId2 = {
-            R.drawable.reject,
-            R.drawable.reject,
-            R.drawable.reject,
-            R.drawable.reject,
-            R.drawable.reject,
-            R.drawable.reject,
-            R.drawable.reject
+            R.drawable.task_complete,
+            R.drawable.task_complete,
+            R.drawable.task_complete,
+            R.drawable.task_complete,
+            R.drawable.task_complete,
+            R.drawable.task_complete,
+            R.drawable.task_complete
 
     };
 
@@ -270,11 +273,11 @@ public class TaskAssignment extends AppCompatActivity {
                     Iterator<DataSnapshot> sub_iterator = sub_snapshotIterator.iterator();
                     while (sub_iterator.hasNext()){
                         DataSnapshot final_next = (DataSnapshot) sub_iterator.next();
-                        Log.i(TAG, "Abhijit >> sub Task value Read Task = "+final_next.child("task_name").getValue());
+                       // Log.i(TAG, "Abhijit >> sub Task value Read Task = "+final_next.child("task_name").getValue());
                         String Taskname= (String)final_next.child("task_name").getValue();
                         if(Taskname!=null) {
                             boolean accept_reject = (boolean) final_next.child("accept_reject").getValue();
-                            Log.i(TAG, "Abhijit >> sub Task value = "+accept_reject);
+                            Log.i(TAG, "Abhijit >> sub Task value = "+accept_reject +"   taskname "+Taskname);
                             if (accept_reject == false) {
                                 taskList.add(Taskname);
                                 task_number++;
@@ -286,12 +289,12 @@ public class TaskAssignment extends AppCompatActivity {
                 if(task_number >0){
 
                     if(AppGlobalSetting.login_category.equals("Citizen")){
-                        CitizenTaskAdapter adapter = new
+                         ci_adapter = new
                                 CitizenTaskAdapter(TaskAssignment.this, taskList);
 
                         MTaskListView = (ListView) findViewById(R.id.list_todo);
-                        MTaskListView.setAdapter(adapter);
-                        MTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        MTaskListView.setAdapter(ci_adapter);
+                       /* MTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view,
@@ -299,23 +302,35 @@ public class TaskAssignment extends AppCompatActivity {
                                 Toast.makeText(TaskAssignment.this, "You Clicked at " +  position, Toast.LENGTH_SHORT).show();
 
                             }
-                        });
+                        });*/
                     }
                     else {
-                        CustomTaskAdapter adapter = new
-                                CustomTaskAdapter(TaskAssignment.this, taskList, imageId1, imageId2);
+                        if(ser_adapter==null) {
 
-                        MTaskListView = (ListView) findViewById(R.id.list_todo);
-                        MTaskListView.setAdapter(adapter);
-                        MTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            Log.i(TAG, "Abhijit >> This is Comming Adapter is null" );
+                            ser_adapter = new
+                                    CustomTaskAdapter(TaskAssignment.this, taskList, imageId1, imageId2);
 
-                            @Override
-                            public void onItemClick(AdapterView<?> parent, View view,
-                                                    int position, long id) {
-                                Toast.makeText(TaskAssignment.this, "You Clicked at " +  position, Toast.LENGTH_SHORT).show();
+                            ser_adapter.setNotifyOnChange(true);
+                            MTaskListView = (ListView) findViewById(R.id.list_todo);
+                            MTaskListView.setAdapter(ser_adapter);
+                            //adapter.notifyDataSetChanged();
+                            MTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+                                @Override
+                                public void onItemClick(AdapterView<?> parent, View view,
+                                                        int position, long id) {
+                                    Toast.makeText(TaskAssignment.this, "You Clicked at " + position, Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+                        }
+                        else
+                            {
+                                Log.i(TAG, "Abhijit >> This is Comming Adapter is Not null" );
+                                ser_adapter.addAll(taskList);
+                                ser_adapter.notifyDataSetChanged();
                             }
-                        });
                     }
 
                 }
@@ -413,5 +428,36 @@ public class TaskAssignment extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
 
+    }
+    @Override
+    protected void onStart() {
+     super.onStart();
+        Log.i(TAG, "Abhijit >> ON START--------- coming here" );
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG, "Abhijit >> ON RESUME--------- coming here" );
+       // Log.d(TAG, "Read task called in on RESUME...............");
+       // Read_Task();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG, "Abhijit >> ON PAUSE--------- coming here" );
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i(TAG, "Abhijit >> ON RE-START--------- coming here" );
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        Log.i(TAG, "Abhijit >> ON STOP--------- coming here" );
     }
 }

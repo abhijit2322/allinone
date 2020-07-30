@@ -2,10 +2,13 @@ package com.abhijit.allinone;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,11 +38,13 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
-public class CustomTaskAdapter extends ArrayAdapter<String> {
+public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnClickListener{
     private static final String TAG = "CustomTaskAdapter";
     private final Activity context;
     //private final String[] web;
@@ -51,14 +56,16 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
     String LOGIN_SERVICE_MAN="83430771990";
 
     ArrayList<String> taskList = new ArrayList<>();
-
+    View growView;
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDbRef;
+    Animation blinkAnimation;
 
     private String userId;
     private String selectedTaskName;
     private String taskNameUpdate;
     private String updateValue;
+    TextView txtTitle;
 
     public void Callsupper()
     {
@@ -70,18 +77,20 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
 
             super(context, R.layout.task_custom_adapter, web);
             this.context = context;
-        this.web = web;
+            this.web = web;
             this.imageId1 = imageId1;
             this.imageId2 = imageId2;
+
+
     }
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView= inflater.inflate(R.layout.task_custom_adapter, null, true);
-        TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
+        growView= inflater.inflate(R.layout.task_custom_adapter, null, true);
+        txtTitle = (TextView) growView.findViewById(R.id.txt);
 
-        ImageView imageView1 = (ImageView) rowView.findViewById(R.id.img1);
-        ImageView imageView2 = (ImageView) rowView.findViewById(R.id.img2);
+        ImageView imageView1 = (ImageView) growView.findViewById(R.id.img1);
+        ImageView imageView2 = (ImageView) growView.findViewById(R.id.img2);
 
         positionG=position;
 
@@ -91,7 +100,15 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
         // imageView1.setImageResource(imageId1[position]);
         //imageView2.setImageResource(imageId2[position]);
 
-        imageView1.setOnClickListener(new View.OnClickListener() {
+        imageView1.setTag(positionG);
+        imageView2.setTag(positionG);
+
+
+
+        imageView1.setOnClickListener(this);
+        imageView2.setOnClickListener(this);
+
+       /* imageView1.setOnClickListener(new View.OnClickListener() {
             String s = web.get(positionG);;//imageId1[positionG];
             @Override
             public void onClick(View v) {
@@ -111,8 +128,8 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
 
             }
         });
-
-        imageView2.setOnClickListener(new View.OnClickListener() {
+*/
+  /*      imageView2.setOnClickListener(new View.OnClickListener() {
             String s = web.get(positionG);//items[position];
 
             @Override
@@ -124,10 +141,51 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
                 context.startActivity(new Intent(context, TaskComplete.class));
                 context.finish();
             }
-        });
+        });*/
 
 
-        return rowView;
+        return growView;
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+        int position=(Integer) v.getTag();
+        Object object= getItem(position);
+        System.out.println("The number is "+object.toString()+"Position is "+position);
+        // DataModel dataModel=(DataModel)object;
+
+        switch (v.getId()) {
+            case R.id.img1:
+                System.out.println("The number  Accept is "+object.toString()+" Position is "+position);
+                UserDetails.chatWith = web.get(positionG);
+                UserDetails.username=REGISTER_NUMBER;
+                selectedTaskName=object.toString();//web.get(positionG);
+                Update_Task("true",selectedTaskName);
+               // growView.invalidate();
+
+
+               try {
+                    Thread.sleep(2000); //1000 milliseconds is one second.
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+                context.startActivity(new Intent(context, TaskAssignment.class));
+                break;
+
+            case R.id.img2:
+                System.out.println("The number Complete is "+object.toString()+" Position is "+position);
+                selectedTaskName=object.toString();//web.get(positionG);
+                Update_Task("false",selectedTaskName);
+                context.startActivity(new Intent(context, TaskComplete.class));
+                context.finish();
+                break;
+        }
+
+
     }
 
 
@@ -148,6 +206,7 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
 
                 Iterable<DataSnapshot> snapshotIterator = dataSnapshot.getChildren();
                 Iterator<DataSnapshot> iterator = snapshotIterator.iterator();
+                txtTitle.setText(" ");
 
                 while (iterator.hasNext()) {
                     DataSnapshot next = (DataSnapshot) iterator.next();
@@ -165,14 +224,27 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
                             Log.i(TAG, "Abhijit >> sub Task value  present  "+Taskname+"  selected task:  "+taskNameUpdate+"  "+final_next.toString());
                             mDbRef=final_next.getRef();
                             if(updateValue.equals("true")) {
-                                 mDbRef.child("accept_reject").setValue(true);
+                               // Map<String, Object> map = new HashMap<>();
+                               // map.put("accept_reject", true);
+                                mDbRef.child("accept_reject").setValue(true);
+                                //mDbRef.child("accept_reject").setValue(map);
+                               // mDbRef.updateChildren(map);
                                 // mDbRef.child(final_next).child()
                             }
                             if(updateValue.equals("false")) {
                                 mDbRef.child("accept_reject").setValue(false);
                                 // mDbRef.child(final_next).child()
                             }
+
                         }
+                        /*boolean accept_reject = (boolean) final_next.child("accept_reject").getValue();
+                        if (accept_reject == false) {
+                            // taskList.add(Taskname);
+                            txtTitle.setText(Taskname);
+
+                        }
+                        else
+                            txtTitle.setText(" ");*/
 
                         // boolean accept_reject= (boolean)final_next.child("accept_reject").getValue();
                         //Log.i(TAG, "Abhijit >> sub Task value = "+Taskname);
@@ -180,13 +252,17 @@ public class CustomTaskAdapter extends ArrayAdapter<String> {
                         //   taskList.add(Taskname);
                     }
                 }
+                //mDbRef.push();
+
                 // Log.d(TAG, " Total Tasks are >>>>55555555 "+taskList);
 
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
+
         };
+
 
 
         mQuery.addListenerForSingleValueEvent(mQueryValueListener);
