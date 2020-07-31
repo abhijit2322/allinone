@@ -2,10 +2,14 @@ package com.abhijit.allinone;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +20,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.abhijit.allinone.model.FirebaseDBModel_Provider;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,6 +50,16 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
     String mVerificationId;
     String occopastion;
     SharedPreferences sharedpreferences;
+    String cit_lang="";
+    String cit_lati="";
+    String ser_lang="";
+    String ser_lati="";
+    String com_lang="";
+    String com_lati="";
+
+    Location currentLocation;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    private static final int REQUEST_CODE = 101;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +68,14 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
 
         sharedpreferences = getSharedPreferences(UserDetails.MyPREFERENCES, Context.MODE_PRIVATE);
 
-
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
 
         initFields();
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();//
         initFireBaseCallbacks();
+        fetchLocation();
     }
 
     void initFields() {
@@ -124,8 +142,12 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                     {
                         UserDetails.userType="Service Provider";
                         UserDetails.username=etPhone.getText().toString();
+                        //UserDetails.cit_lang=" ";
+                       // UserDetails.cit_lati=" ";
+                       // UserDetails.ser_lang=com_lang;
+                        //UserDetails.ser_lati=com_lati;;
                         startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
-                      //  finish();
+                        finish();
                        // UserDetails.userType="Service Provider";
                        // startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
                         //finish();
@@ -136,6 +158,12 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                     {
                         UserDetails.userType="Citizen";
                         UserDetails.username=etPhone.getText().toString();
+
+                        UserDetails.cit_lang=com_lang;
+                        UserDetails.cit_lati=com_lati;
+                        //UserDetails.ser_lang=" ";
+                        //UserDetails.ser_lati=" ";
+
                         startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
                     }
                 }
@@ -253,6 +281,33 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                         Log.d("TAG", e.toString());
                     }
                 });
+    }
+
+
+    private void fetchLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+            return;
+        }
+        Task<Location> task = fusedLocationProviderClient.getLastLocation();
+        task.addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null) {
+                    currentLocation = location;
+                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                    com_lang=Double.toString(currentLocation.getLongitude());
+                    com_lati=Double.toString(currentLocation.getLatitude());
+                    System.out.println("Abhijit Your Lat...."+currentLocation.getLatitude()+"  Your Lang  "+currentLocation.getLongitude());
+                    System.out.println("Abhijit Your Lat...."+com_lati+"  Your Lang  "+com_lang);
+                   // SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.myMap);
+                   // assert supportMapFragment != null;
+                   // supportMapFragment.getMapAsync(MainActivity.this);
+                }
+            }
+        });
     }
 
 }

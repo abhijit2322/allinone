@@ -12,17 +12,48 @@ public class TodoTask {
     String advancepaied;
     String feedback;
     String task_status;
+    String cit_lang;
+    String cit_lati;
+    String ser_lang;
+    String ser_lati;
 
 
-
-
-
-
-    public TodoTask(){
-
+    public String getCit_lang() {
+        return cit_lang;
     }
 
-    public TodoTask(String task_name, String assigned_by, String accepted_by, String charges, String start_date, String end_date, boolean accept_reject, String advancepaied, String feedback,String task_status) {
+    public void setCit_lang(String cit_lang) {
+        this.cit_lang = cit_lang;
+    }
+
+    public String getCit_lati() {
+        return cit_lati;
+    }
+
+    public void setCit_lati(String cit_lati) {
+        this.cit_lati = cit_lati;
+    }
+
+    public String getSer_lang() {
+        return ser_lang;
+    }
+
+    public void setSer_lang(String ser_lang) {
+        this.ser_lang = ser_lang;
+    }
+
+    public String getSer_lati() {
+        return ser_lati;
+    }
+
+    public void setSer_lati(String ser_lati) {
+        this.ser_lati = ser_lati;
+    }
+
+
+
+
+    public TodoTask(String task_name, String assigned_by, String accepted_by, String charges, String start_date, String end_date, boolean accept_reject, String advancepaied, String feedback, String task_status, String cit_lang, String cit_lati, String ser_lang, String ser_lati) {
         this.task_name = task_name;
         this.assigned_by = assigned_by;
         this.accepted_by = accepted_by;
@@ -32,8 +63,21 @@ public class TodoTask {
         this.accept_reject = accept_reject;
         this.advancepaied = advancepaied;
         this.feedback = feedback;
-        this.task_status=task_status;
+        this.task_status = task_status;
+        this.cit_lang = cit_lang;
+        this.cit_lati = cit_lati;
+        this.ser_lang = ser_lang;
+        this.ser_lati = ser_lati;
     }
+
+
+
+
+    public TodoTask(){
+
+    }
+
+
 
     public String getTask_status() {
         return task_status;

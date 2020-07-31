@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.abhijit.allinone.FirebaseChat.FirebaseMainChatActivity;
+import com.abhijit.allinone.trackdelivary.MainTrackerDelivary;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,7 +53,7 @@ public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnCl
     private final Integer[] imageId2;
     public int positionG=0;
     ArrayList<String> web = new ArrayList<>();
-    String REGISTER_NUMBER="93430771993";
+    String REGISTER_NUMBER=UserDetails.username;
     String LOGIN_SERVICE_MAN=UserDetails.username;
 
     ArrayList<String> taskList = new ArrayList<>();
@@ -163,7 +164,7 @@ public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnCl
                 UserDetails.chatWith = web.get(positionG);
                 UserDetails.username=REGISTER_NUMBER;
                 selectedTaskName=object.toString();//web.get(positionG);
-                Update_Task("true",selectedTaskName);
+                Update_Task("accept",selectedTaskName);
                // growView.invalidate();
 
 
@@ -174,13 +175,14 @@ public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnCl
                 {
                     e.printStackTrace();
                 }
-                context.startActivity(new Intent(context, TaskAssignment.class));
+                context.startActivity(new Intent(context, MainTrackerDelivary.class));//TaskAssignment.class));
+                context.finish();
                 break;
 
             case R.id.img2:
                 System.out.println("The number Complete is "+object.toString()+" Position is "+position);
                 selectedTaskName=object.toString();//web.get(positionG);
-                Update_Task("false",selectedTaskName);
+                Update_Task("complete",selectedTaskName);
 
                 try {
                     Thread.sleep(2000); //1000 milliseconds is one second.
@@ -242,13 +244,24 @@ public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnCl
                                 //mDbRef.child("accept_reject").setValue(map);
                                // mDbRef.updateChildren(map);
                                 // mDbRef.child(final_next).child()
-                                UserDetails.chatWith=asignee_number;
+                               // UserDetails.chatWith=asignee_number;
                             }
                             if(updateValue.equals("false")) {
                                 mDbRef.child("accept_reject").setValue(false);
-                                UserDetails.chatWith=asignee_number;
+                              //  UserDetails.chatWith=asignee_number;
                                 // mDbRef.child(final_next).child()
                             }
+                            if(updateValue.equals("accept")) {
+                                mDbRef.child("task_status").setValue("started");
+                               // UserDetails.chatWith=asignee_number;
+                                // mDbRef.child(final_next).child()
+                            }
+                            if(updateValue.equals("complete")) {
+                                mDbRef.child("task_status").setValue("complete");
+                               // UserDetails.chatWith=asignee_number;
+                                // mDbRef.child(final_next).child()
+                            }
+
 
                         }
                         /*boolean accept_reject = (boolean) final_next.child("accept_reject").getValue();

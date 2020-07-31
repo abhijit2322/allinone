@@ -3,6 +3,8 @@
     package="com.abhijit.allinone">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -37,7 +39,25 @@
         <activity android:name=".Display_Sms_Call" />
         <activity android:name=".RegistrationForm" />
         <activity android:name=".TaskAssignment" />
-        <activity android:name=".TaskComplete"/>
+        <activity android:name=".TaskComplete" />
+        <activity android:name=".trackdelivary.MainTrackerDelivary"/>
+        <activity android:name=".trackdelivary.LoginActivity" />
+        <activity android:name=".trackdelivary.DboyActivity" />
+        <activity android:name=".trackdelivary.UpdateOrderActivity" />
+
+        <service
+            android:name=".trackdelivary.service.LocationUpdateService"
+            android:exported="false" />
+
+        <activity android:name=".trackdelivary.OrderDetailActivity" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAWQV_usmixs7_B_fvAIwq9Nj3IQFdfrK8" />
+
+        <activity
+            android:name=".trackdelivary.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".trackdelivary.ShowUserOrdersActivity"/>
     </application>
 
 </manifest>

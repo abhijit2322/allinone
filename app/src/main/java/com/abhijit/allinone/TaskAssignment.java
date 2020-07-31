@@ -224,7 +224,7 @@ public class TaskAssignment extends AppCompatActivity {
         Date date = cal.getTime();
         String todaysdate = dateFormat.format(date);
         System.out.println("Today's date : " + todaysdate);
-        TodoTask user = new TodoTask(task_details,UserDetails.username,UserDetails.chatWith,UserDetails.charges,todaysdate,"  ",false,"No","no ","started");
+        TodoTask user = new TodoTask(task_details,UserDetails.username,UserDetails.chatWith,UserDetails.charges,todaysdate,"  ",false,"No","no ","started",UserDetails.cit_lang,UserDetails.cit_lati,UserDetails.ser_lang,UserDetails.ser_lati);
 
         mDbRef.child(userId+"/"+sub_folder).setValue(user);
 
@@ -289,13 +289,19 @@ public class TaskAssignment extends AppCompatActivity {
                             boolean accept_reject = (boolean) final_next.child("accept_reject").getValue();
                             String accepted_by = (String) final_next.child("accepted_by").getValue();
                             String asignee_number=(String)final_next.child("assigned_by").getValue();
-                            Log.i(TAG, "Abhijit >> sub Task value = "+accept_reject +"   taskname "+Taskname+" Accepted by "+accepted_by);
+                            String cit_lang=(String)final_next.child("cit_lang").getValue();
+                            String cit_lati=(String)final_next.child("cit_lati").getValue();
+                            Log.i(TAG, "Abhijit >> sub Task value = "+accept_reject +"   taskname "+Taskname+" Accepted by "+accepted_by+" Accepted by "+UserDetails.username);
                             if (accepted_by.contains(UserDetails.username)) {
+                                Log.i(TAG, "Abhijit >> Accepted by................");
+                                UserDetails.cit_lati=cit_lati;
+                                UserDetails.cit_lang=cit_lang;
                                 taskList.add(Taskname);
                                 task_number++;
                             }
                             if ((asignee_number.contains(UserDetails.username)))
                             {
+                                Log.i(TAG, "Abhijit >> Assignee by...............");
                                 taskList.add(Taskname);
                                 task_number++;
                             }
