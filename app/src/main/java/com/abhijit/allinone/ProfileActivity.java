@@ -147,14 +147,14 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 //actions
-                getApplicationContext().startActivity(new Intent(getApplicationContext(), RegistrationForm.class));
+               startActivity(new Intent(getApplicationContext(), RegistrationForm.class));
             }
 
         });
         gotask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                getApplicationContext().startActivity(new Intent(getApplicationContext(), TaskAssignment.class));
+                startActivity(new Intent(getApplicationContext(), TaskAssignment.class));
             }
 
         });

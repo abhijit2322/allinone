@@ -47,6 +47,7 @@ public class ProcessCitizenRequest extends AppCompatActivity {
 
                     Toast.makeText(ProcessCitizenRequest.this, "Image Position: " + imagefooter[position], Toast.LENGTH_SHORT).show();
                     AppGlobalSetting.occopassion=imagefooter[position];
+                    UserDetails.occupation=imagefooter[position];
                     startActivity(new Intent(ProcessCitizenRequest.this, Display_Sms_Call.class));//OnlinePresentUser
 
 
@@ -57,6 +58,7 @@ public class ProcessCitizenRequest extends AppCompatActivity {
             pass_for_single = false;
             Toast.makeText(ProcessCitizenRequest.this, "Image Position: " + request_for, Toast.LENGTH_SHORT).show();
             AppGlobalSetting.occopassion=request_for;
+            UserDetails.occupation=request_for;
             finish();
             startActivity(new Intent(ProcessCitizenRequest.this, Display_Sms_Call.class));//OnlinePresentUser
         }

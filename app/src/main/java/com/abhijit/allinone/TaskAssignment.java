@@ -35,9 +35,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.auth.User;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
@@ -127,7 +130,9 @@ public class TaskAssignment extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        if(UserDetails.userType.contains("Citizen")){
+            getMenuInflater().inflate(R.menu.main_menu, menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -212,9 +217,14 @@ public class TaskAssignment extends AppCompatActivity {
 
     public void Save_Task(String task_details){
 
-        String userId = LOGIN_SERVICE_MAN;
+        String userId = UserDetails.username;
         sub_folder= new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-        TodoTask user = new TodoTask(task_details,"83430771990",REGISTER_NUMBER,"200","12/6/2020 ","13/6/2020 ",false,"No","no ");
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        String todaysdate = dateFormat.format(date);
+        System.out.println("Today's date : " + todaysdate);
+        TodoTask user = new TodoTask(task_details,UserDetails.username,UserDetails.chatWith,"200",todaysdate,"  ",false,"No","no ");
 
         mDbRef.child(userId+"/"+sub_folder).setValue(user);
 
@@ -277,8 +287,9 @@ public class TaskAssignment extends AppCompatActivity {
                         String Taskname= (String)final_next.child("task_name").getValue();
                         if(Taskname!=null) {
                             boolean accept_reject = (boolean) final_next.child("accept_reject").getValue();
-                            Log.i(TAG, "Abhijit >> sub Task value = "+accept_reject +"   taskname "+Taskname);
-                            if (accept_reject == false) {
+                            String accepted_by = (String) final_next.child("accepted_by").getValue();
+                            Log.i(TAG, "Abhijit >> sub Task value = "+accept_reject +"   taskname "+Taskname+" Accepted by "+accepted_by);
+                            if ((accept_reject == false)&&(accepted_by.contains(UserDetails.username))) {
                                 taskList.add(Taskname);
                                 task_number++;
                             }

@@ -3,7 +3,9 @@ package com.abhijit.allinone;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -40,11 +42,18 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     String mVerificationId;
     String occopastion;
+    SharedPreferences sharedpreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_fire_base);
+
+        sharedpreferences = getSharedPreferences(UserDetails.MyPREFERENCES, Context.MODE_PRIVATE);
+
+
+
+
         initFields();
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();//
@@ -100,16 +109,51 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
 
 
                 //////testing purpose
+                String Phone = sharedpreferences.getString(UserDetails.phone, "");
+                String loginkey = sharedpreferences.getString(UserDetails.loginkey, "");
+                String logintype=sharedpreferences.getString(UserDetails.logintype, "");
+
+                System.out.println("Abhijit shared The phone Number...."+Phone+"   "+logintype);
+
+                //if(Phone.trim().contains(etPhone.getText().toString().trim()))
+                if(Phone.trim().equals(etPhone.getText().toString().trim()))
+                {
+                    if(logintype.contains("Service Provider"))
+                    {
+                        UserDetails.userType="Service Provider";
+                        UserDetails.username=etPhone.getText().toString();
+                        startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
+                    }
+                    else
+                    {
+                        UserDetails.userType="Citizen";
+                        UserDetails.username=etPhone.getText().toString();
+                        startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
+                    }
+                }
+                else
+                {
+                    SharedPreferences.Editor editor = sharedpreferences.edit();
+                    editor.putString(UserDetails.phone, etPhone.getText().toString());
+                    editor.putString(UserDetails.loginkey, "complete");
+                    editor.putString(UserDetails.logintype, occopastion);
+                    editor.commit();
+                }
+
+
+
                 if (occopastion.contains("Service Provider"))
                 {
                     // finish();
                     UserDetails.userType="Service Provider";
+                    UserDetails.username=etPhone.getText().toString();
                     startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
                 }
                 else
                 {
                     // finish();
                     UserDetails.userType="Citizen";
+                    UserDetails.username=etPhone.getText().toString();
                     startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
                 }
 

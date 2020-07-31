@@ -29,19 +29,21 @@ public class CustomList extends ArrayAdapter<String> implements View.OnClickList
 
     public int positionG=0;
     ArrayList<String> web = new ArrayList<>();
-    String REGISTER_NUMBER="93430771993";
+    ArrayList<String> chargelist = new ArrayList<>();
+    String REGISTER_NUMBER=UserDetails.username;
     TextView txtTitle;
     View growView;
 
 
     public CustomList(Activity context,
-                      ArrayList<String> web, Integer[] imageId1,Integer[] imageId2,Integer[] imageId3) {
+                      ArrayList<String> web, Integer[] imageId1,Integer[] imageId2,Integer[] imageId3,ArrayList<String> chargelist) {
         super(context, R.layout.list_icon, web);
         this.context = context;
         this.web = web;
         this.imageId1 = imageId1;
         this.imageId2 = imageId2;
         this.imageId3=imageId3;
+        this.chargelist=chargelist;
     }
     @Override
     public View getView(int position, View view, ViewGroup parent) {
@@ -80,7 +82,7 @@ public class CustomList extends ArrayAdapter<String> implements View.OnClickList
 
         int position=(Integer) v.getTag();
         Object object= getItem(position);
-        System.out.println("The number is "+object.toString()+"Position is "+position);
+        System.out.println("The number is "+object.toString()+"Position is "+position+"Charge List  "+chargelist.get(position));
        // DataModel dataModel=(DataModel)object;
 
         switch (v.getId()) {
@@ -93,14 +95,14 @@ public class CustomList extends ArrayAdapter<String> implements View.OnClickList
             case R.id.img2:
                 System.out.println("The number SMS is "+object.toString()+"Position is "+position);
                 UserDetails.chatWith = object.toString();
-                UserDetails.username=REGISTER_NUMBER;
+
                 context.startActivity(new Intent(context, FirebaseMainChatActivity.class));
                 break;
 
             case R.id.img3:
                 System.out.println("The number SMS is "+object.toString()+"Position is "+position);
                 UserDetails.chatWith = object.toString();
-                UserDetails.username=REGISTER_NUMBER;
+                UserDetails.charges=chargelist.get(position);
                 AppGlobalSetting.login_category="Citizen";
                 context.startActivity(new Intent(context, TaskAssignment.class));
                 break;

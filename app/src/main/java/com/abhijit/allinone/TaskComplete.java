@@ -70,7 +70,7 @@ public class TaskComplete extends AppCompatActivity implements View.OnClickListe
     PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     String mVerificationId;
     //String occopastion;
-    String REQUEST_CITIZEN_NUMBER="9740856007";
+    String REQUEST_CITIZEN_NUMBER=UserDetails.chatWith;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
