@@ -47,6 +47,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_login_fire_base);
         initFields();
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();//
         initFireBaseCallbacks();
     }
 
@@ -102,11 +103,13 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                 if (occopastion.contains("Service Provider"))
                 {
                     // finish();
+                    UserDetails.userType="Service Provider";
                     startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
                 }
                 else
                 {
                     // finish();
+                    UserDetails.userType="Citizen";
                     startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
                 }
 
@@ -150,11 +153,13 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                                     {
 
                                         finish();
+                                        UserDetails.userType="Service Provider";
                                         startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
                                     }
                                     else
                                     {
                                         finish();
+                                        UserDetails.userType="Citizen";
                                         startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
                                     }
                                 } else {

@@ -55,7 +55,7 @@
             android:id="@+id/reg_charge"
             android:layout_height="wrap_content"
             android:hint="Enter your charge"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:layout_width="fill_parent">
         </EditText>
 

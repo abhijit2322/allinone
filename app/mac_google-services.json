@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "198998287866",
+    "firebase_url": "https://allinone-2ecf2.firebaseio.com",
+    "project_id": "allinone-2ecf2",
+    "storage_bucket": "allinone-2ecf2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198998287866:android:b94d76787fb6210a81b043",
+        "android_client_info": {
+          "package_name": "com.abhijit.allinone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "198998287866-o1thaqfgvcu0124qekn46mhp1qq1ai71.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-c7fgPSZn_Btyp3h8Iw_2vUlSO6GH0Bs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "198998287866-o1thaqfgvcu0124qekn46mhp1qq1ai71.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

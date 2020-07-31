@@ -78,6 +78,7 @@ public class TaskComplete extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_task_complete);
         initFields();
         mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
         initFireBaseCallbacks();
         SendOtpToCitizen();
     }

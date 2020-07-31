@@ -288,7 +288,7 @@ public class TaskAssignment extends AppCompatActivity {
                 //Log.d(TAG, " Total Tasks are >>>>55555555 "+taskList);
                 if(task_number >0){
 
-                    if(AppGlobalSetting.login_category.equals("Citizen")){
+                    if(UserDetails.userType.equals("Citizen")){
                          ci_adapter = new
                                 CitizenTaskAdapter(TaskAssignment.this, taskList);
 

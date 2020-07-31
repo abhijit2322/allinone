@@ -16,7 +16,7 @@ public class ProfileActivity extends AppCompatActivity {
             ,email_id,place_name,skill_names,company_email,company_location,exp_title,exp_place,exp_duration,
             mydesc;
 
-    ImageView profile_Image;
+    ImageView profile_Image,back,gotask,noti_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,8 @@ public class ProfileActivity extends AppCompatActivity {
         personalinfobtn = findViewById(R.id.personalinfobtn);
         experiencebtn = findViewById(R.id.experiencebtn);
         reviewbtn = findViewById(R.id.reviewbtn);
-
+        back=findViewById(R.id.goback);
+        gotask=findViewById(R.id.gotask);
 
 
 
@@ -48,6 +49,9 @@ public class ProfileActivity extends AppCompatActivity {
         exp_place=findViewById(R.id.exp_place);
         exp_duration=findViewById(R.id.exp_duration);
         profile_Image=findViewById(R.id.profile_Image);
+
+        //back.setOnClickListener(this);
+
 
         Intent i = getIntent();
 
@@ -137,6 +141,22 @@ public class ProfileActivity extends AppCompatActivity {
                 reviewbtn.setTextColor(getResources().getColor(R.color.blue));
 
             }
+        });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                //actions
+                getApplicationContext().startActivity(new Intent(getApplicationContext(), RegistrationForm.class));
+            }
+
+        });
+        gotask.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                getApplicationContext().startActivity(new Intent(getApplicationContext(), TaskAssignment.class));
+            }
+
         });
     }
 }

@@ -37,7 +37,7 @@
         android:id="@+id/verified"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginLeft="170dp"
+        android:layout_marginLeft="120dp"
         android:background="@drawable/verified" />
 
 
