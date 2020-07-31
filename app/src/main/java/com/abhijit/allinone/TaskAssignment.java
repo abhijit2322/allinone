@@ -54,8 +54,8 @@ public class TaskAssignment extends AppCompatActivity {
     TextView mTaskText;
     TextView listtextview;
     private ArrayAdapter<String> mAdapter;
-    String REGISTER_NUMBER="93430771993";
-    String LOGIN_SERVICE_MAN="83430771990";
+    String REGISTER_NUMBER=UserDetails.username;
+    String LOGIN_SERVICE_MAN=UserDetails.chatWith;
     String citizenRequest="";
     String sub_folder;
     ArrayList<String> taskList = new ArrayList<>();
@@ -224,7 +224,7 @@ public class TaskAssignment extends AppCompatActivity {
         Date date = cal.getTime();
         String todaysdate = dateFormat.format(date);
         System.out.println("Today's date : " + todaysdate);
-        TodoTask user = new TodoTask(task_details,UserDetails.username,UserDetails.chatWith,"200",todaysdate,"  ",false,"No","no ");
+        TodoTask user = new TodoTask(task_details,UserDetails.username,UserDetails.chatWith,UserDetails.charges,todaysdate,"  ",false,"No","no ","started");
 
         mDbRef.child(userId+"/"+sub_folder).setValue(user);
 
@@ -288,8 +288,14 @@ public class TaskAssignment extends AppCompatActivity {
                         if(Taskname!=null) {
                             boolean accept_reject = (boolean) final_next.child("accept_reject").getValue();
                             String accepted_by = (String) final_next.child("accepted_by").getValue();
+                            String asignee_number=(String)final_next.child("assigned_by").getValue();
                             Log.i(TAG, "Abhijit >> sub Task value = "+accept_reject +"   taskname "+Taskname+" Accepted by "+accepted_by);
-                            if ((accept_reject == false)&&(accepted_by.contains(UserDetails.username))) {
+                            if (accepted_by.contains(UserDetails.username)) {
+                                taskList.add(Taskname);
+                                task_number++;
+                            }
+                            if ((asignee_number.contains(UserDetails.username)))
+                            {
                                 taskList.add(Taskname);
                                 task_number++;
                             }

@@ -107,22 +107,30 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                 System.out.println("Abhijit The phone Number...."+etPhone.getText().toString()+"   "+occopastion);
                 String Phonenumber="+91"+etPhone.getText().toString();
 
+                if (etPhone.getText().toString().isEmpty()||occopastion.isEmpty())
+                {
+                    return;
+                }
 
-                //////testing purpose
+
                 String Phone = sharedpreferences.getString(UserDetails.phone, "");
                 String loginkey = sharedpreferences.getString(UserDetails.loginkey, "");
                 String logintype=sharedpreferences.getString(UserDetails.logintype, "");
 
-                System.out.println("Abhijit shared The phone Number...."+Phone+"   "+logintype);
-
                 //if(Phone.trim().contains(etPhone.getText().toString().trim()))
-                if(Phone.trim().equals(etPhone.getText().toString().trim()))
+            if(Phone.contains(etPhone.getText().toString()))
                 {
                     if(logintype.contains("Service Provider"))
                     {
                         UserDetails.userType="Service Provider";
                         UserDetails.username=etPhone.getText().toString();
                         startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
+                      //  finish();
+                       // UserDetails.userType="Service Provider";
+                       // startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
+                        //finish();
+                       // getApplicationContext().startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
+                      //  break;
                     }
                     else
                     {
@@ -138,11 +146,17 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                     editor.putString(UserDetails.loginkey, "complete");
                     editor.putString(UserDetails.logintype, occopastion);
                     editor.commit();
+
+
+                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                            Phonenumber,//etPhone.getText().toString(),        // Phone number to verify
+                            1,                 // Timeout duration
+                            TimeUnit.MINUTES,   // Unit of timeout
+                            this,               // Activity (for callback binding)
+                            mCallbacks);
                 }
-
-
-
-                if (occopastion.contains("Service Provider"))
+ //////testing purpose
+         /*       if (occopastion.contains("Service Provider"))
                 {
                     // finish();
                     UserDetails.userType="Service Provider";
@@ -155,21 +169,11 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                     UserDetails.userType="Citizen";
                     UserDetails.username=etPhone.getText().toString();
                     startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
-                }
+                }*/
 
 //////testing purpose
 
 
-                if (etPhone.getText().toString().isEmpty()||occopastion.isEmpty())
-                {
-                    return;
-                }
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                        Phonenumber,//etPhone.getText().toString(),        // Phone number to verify
-                        1,                 // Timeout duration
-                        TimeUnit.MINUTES,   // Unit of timeout
-                        this,               // Activity (for callback binding)
-                        mCallbacks);
                 break;
             case R.id.resend:
                 break;

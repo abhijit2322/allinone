@@ -11,13 +11,18 @@ public class TodoTask {
     boolean accept_reject;
     String advancepaied;
     String feedback;
+    String task_status;
+
+
+
+
 
 
     public TodoTask(){
 
     }
 
-    public TodoTask(String task_name, String assigned_by, String accepted_by, String charges, String start_date, String end_date, boolean accept_reject, String advancepaied, String feedback) {
+    public TodoTask(String task_name, String assigned_by, String accepted_by, String charges, String start_date, String end_date, boolean accept_reject, String advancepaied, String feedback,String task_status) {
         this.task_name = task_name;
         this.assigned_by = assigned_by;
         this.accepted_by = accepted_by;
@@ -27,9 +32,16 @@ public class TodoTask {
         this.accept_reject = accept_reject;
         this.advancepaied = advancepaied;
         this.feedback = feedback;
+        this.task_status=task_status;
     }
 
+    public String getTask_status() {
+        return task_status;
+    }
 
+    public void setTask_status(String task_status) {
+        this.task_status = task_status;
+    }
 
     public String getTask_name() {
         return task_name;

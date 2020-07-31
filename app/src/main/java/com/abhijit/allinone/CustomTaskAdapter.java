@@ -53,7 +53,7 @@ public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnCl
     public int positionG=0;
     ArrayList<String> web = new ArrayList<>();
     String REGISTER_NUMBER="93430771993";
-    String LOGIN_SERVICE_MAN="83430771990";
+    String LOGIN_SERVICE_MAN=UserDetails.username;
 
     ArrayList<String> taskList = new ArrayList<>();
     View growView;
@@ -65,6 +65,7 @@ public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnCl
     private String selectedTaskName;
     private String taskNameUpdate;
     private String updateValue;
+    private String assigned_number;
     TextView txtTitle;
 
     public void Callsupper()
@@ -180,6 +181,16 @@ public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnCl
                 System.out.println("The number Complete is "+object.toString()+" Position is "+position);
                 selectedTaskName=object.toString();//web.get(positionG);
                 Update_Task("false",selectedTaskName);
+
+                try {
+                    Thread.sleep(2000); //1000 milliseconds is one second.
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+
+
                 context.startActivity(new Intent(context, TaskComplete.class));
                 context.finish();
                 break;
@@ -218,10 +229,11 @@ public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnCl
                         DataSnapshot final_next = (DataSnapshot) sub_iterator.next();
                         //Log.i(TAG, "Abhijit >> sub Task value = "+final_next.child("task_name").getValue());
                         String Taskname= (String)final_next.child("task_name").getValue();
-                        Log.i(TAG, "Abhijit >> sub Task value  present  first "+Taskname);
+                        String asignee_number=(String)final_next.child("assigned_by").getValue();
+                        Log.i(TAG, "Abhijit >> sub Task value  present  first "+Taskname+"Assignee number "+asignee_number);
                         if(taskNameUpdate.equals(Taskname))
                         {
-                            Log.i(TAG, "Abhijit >> sub Task value  present  "+Taskname+"  selected task:  "+taskNameUpdate+"  "+final_next.toString());
+                            Log.i(TAG, "Abhijit >> sub Task value  present  "+Taskname+"  selected task:  "+taskNameUpdate+"  "+"Assignee number"+asignee_number+"  "+final_next.toString());
                             mDbRef=final_next.getRef();
                             if(updateValue.equals("true")) {
                                // Map<String, Object> map = new HashMap<>();
@@ -230,9 +242,11 @@ public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnCl
                                 //mDbRef.child("accept_reject").setValue(map);
                                // mDbRef.updateChildren(map);
                                 // mDbRef.child(final_next).child()
+                                UserDetails.chatWith=asignee_number;
                             }
                             if(updateValue.equals("false")) {
                                 mDbRef.child("accept_reject").setValue(false);
+                                UserDetails.chatWith=asignee_number;
                                 // mDbRef.child(final_next).child()
                             }
 

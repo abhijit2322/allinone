@@ -118,7 +118,8 @@ public class TaskComplete extends AppCompatActivity implements View.OnClickListe
 
     public void SendOtpToCitizen()
     {
-        String Phonenumber="+91"+REQUEST_CITIZEN_NUMBER;
+        String Phonenumber="+91"+UserDetails.chatWith;
+        System.out.println("Abhijit Customer phone number..>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+Phonenumber);
        PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 Phonenumber,//etPhone.getText().toString(),        // Phone number to verify
                 1,                 // Timeout duration
