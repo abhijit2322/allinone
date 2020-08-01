@@ -31,9 +31,9 @@
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyC3sJ62iRWxkXovb18f-WTCzyrLqobqxV4" /> <!-- <activity android:name=".DashBoard"> -->
-        <activity android:name=".Login_FireBase"/>
-        <activity android:name=".trackdelivary.Delivarymap">
+            android:value="AIzaSyCWuwTS9OLQZGs2F3gWfmI1x5MA2TGxUIc" /><!-- <activity android:name=".DashBoard"> -->
+        <activity android:name=".Login_FireBase">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -72,6 +72,7 @@
             android:name=".trackdelivary.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".trackdelivary.ShowUserOrdersActivity" />
+        <activity android:name=".trackdelivary.Delivarymap"/>
     </application>
 
 </manifest>
