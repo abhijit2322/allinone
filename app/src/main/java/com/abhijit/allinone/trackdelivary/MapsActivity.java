@@ -45,6 +45,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
         if(getIntent().hasExtra(Constants.MAPS_TYPE)) {
             mapType = getIntent().getStringExtra(Constants.MAPS_TYPE);
             userId = getIntent().getStringExtra(Constants.CURRENT_USER);
@@ -95,13 +97,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         if (mapType != null && mapType.equals("D")) {
-            LatLng latLan = new LatLng(Double.parseDouble(UserDetails.cit_lati), Double.parseDouble(UserDetails.cit_lang));//(String) dataSnapshot.child("currentLocation").getValue();
+           // LatLng latLan = new LatLng(Double.parseDouble(UserDetails.cit_lati), Double.parseDouble(UserDetails.cit_lang));//(String) dataSnapshot.child("currentLocation").getValue();
+            LatLng latLan = new LatLng( Double.parseDouble(UserDetails.cit_lang),Double.parseDouble(UserDetails.cit_lati));
             userLocation = UserDetails.cit_lati+","+UserDetails.cit_lang;
-           LatLng location = latLan;//new LatLng(Double.parseDouble(latLang.split(Constants.LOCATION_DELIMITER)[0]), Double.parseDouble(latLang.split(Constants.LOCATION_DELIMITER)[1]));
-            lastMarker = mMap.addMarker(new MarkerOptions().position(location).title("User is here"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+           //LatLng location = latLan;//new LatLng(Double.parseDouble(latLang.split(Constants.LOCATION_DELIMITER)[0]), Double.parseDouble(latLang.split(Constants.LOCATION_DELIMITER)[1]));
+            //lastMarker = mMap.addMarker(new MarkerOptions().position(location).title("User is here"));
+           // mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
             // Zoom out to zoom level 10, animating with a duration of 1 second.
+          //  mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 1000, null);
+
+           /* MarkerOptions markerOptions = new MarkerOptions().position(latLan).title("I am here!");
+            mMap.animateCamera(CameraUpdateFactory.newLatLng(latLan));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLan, 5));
+            lastMarker= mMap.addMarker(markerOptions);*/
+
+            LatLng location = new LatLng(-33.852, 151.211);
+            userLocation="-33.852, 151.211";
+            mMap.addMarker(new MarkerOptions()
+                    .position(location)
+                    .title("Marker in Sydney"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(14), 1000, null);
+
         }
         else if (mapType != null && mapType.equals("U")) {
 

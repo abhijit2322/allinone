@@ -17,7 +17,9 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
+import com.google.android.gms.common.internal.service.Common;
 import com.google.android.gms.maps.model.LatLng;
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 public class OrderDetailActivity extends AppCompatActivity {
@@ -42,17 +44,9 @@ public class OrderDetailActivity extends AppCompatActivity {
         intent.putExtra(Constants.CURRENT_DELBOY, "Abhijit2");//delBoyId);
         startActivity(intent);
 
-        staticUserLocationImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Go to Map Activity
-                Intent intent = new Intent(OrderDetailActivity.this, MapsActivity.class);
-                intent.putExtra(Constants.MAPS_TYPE,mapType);
-                intent.putExtra(Constants.CURRENT_USER, "Abhijit1");//userId);
-                intent.putExtra(Constants.CURRENT_DELBOY, "Abhijit2");//delBoyId);
-                startActivity(intent);
-            }
-        });
+
+
+
 
 
 /*
@@ -172,15 +166,37 @@ public class OrderDetailActivity extends AppCompatActivity {
         if (mapType.equals("D")) {
 
             try {
-               // String latLan = UserDetails.cit_lati + "," + UserDetails.cit_lang;
+                 String latLan = UserDetails.cit_lati + "," + UserDetails.cit_lang;
 
-                LatLng latLan = new LatLng(Double.parseDouble(UserDetails.cit_lati), Double.parseDouble(UserDetails.cit_lang));
+                //LatLng latLan = new LatLng(Double.parseDouble(UserDetails.cit_lati), Double.parseDouble(UserDetails.cit_lang));
 
                 System.out.println("The total lat lang >>>>>>at D>>>>>>>>>" + latLan);
 
                 String placeUrl = "https://maps.googleapis.com/maps/api/staticmap?center=" + latLan + "&zoom=17&size=1200x250&maptype=roadmap&markers=color:red%7C" + latLan + "&key=AIzaSyBP_hEMi4Pu0VGFRRzeFH4Podfkf2qGEks";
-                // Picasso.with(OrderDetailActivity.this).load(placeUrl).resize(staticUserLocationImage.getWidth(), 300).centerCrop().into(staticUserLocationImage);
-                Picasso.get().load(placeUrl).resize(staticUserLocationImage.getWidth(), 100).centerCrop().into(staticUserLocationImage);
+                String staticMap="https://maps.googleapis.com/maps/api/staticmap?center="+latLan+"&zoom=12&size=400x400&key=AIzaSyAWQV_usmixs7_B_fvAIwq9Nj3IQFdfrK8";
+                String staticmap1="https://maps.googleapis.com/maps/api/staticmap?center=40.714728,-73.998672&zoom=12&size=400x400&key=AIzaSyA3wuM1iAJVrTr9tQVtomCWEbx_MPpZ9BY";
+                // Picasso.with(OrderDetailActivity.this).load(placeUrl).resize(staticUserLocationImage.getWidth(), 300).centerCrop().into(staticUserLocationImage);  //AIzaSyAWQV_usmixs7_B_fvAIwq9Nj3IQFdfrK8   //AIzaSyBP_hEMi4Pu0VGFRRzeFH4Podfkf2qGEks
+                //Picasso.get().load(placeUrl).resize(staticUserLocationImage.getWidth(), 300).centerCrop().into(staticUserLocationImage);
+               // AIzaSyA3wuM1iAJVrTr9tQVtomCWEbx_MPpZ9BY
+               // AIzaSyC3sJ62iRWxkXovb18f-WTCzyrLqobqxV4
+
+
+            /*    String u1="https://maps.googleapis.com/maps/api/staticmap?center=63.259591,-144.667969&zoom=6&size=400x400\n" +
+                        "&markers=color:blue%7Clabel:S%7C62.107733,-145.541936&markers=size:tiny%7Ccolor:green%7CDelta+Junction,AK\n" +
+                        "&markers=size:mid%7Ccolor:0xFFFF00%7Clabel:C%7CTok,AK\"&key=AIzaSyAWQV_usmixs7_B_fvAIwq9Nj3IQFdfrK8";*/
+                Picasso.get().load(staticmap1).into(staticUserLocationImage, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        System.out.println(" piccassa success .........");
+                    }
+
+                    @Override
+                    public void onError(Exception r) {
+                        System.out.println(" piccassa fail ........."+r.getMessage());
+                    }
+                });
+
+
             }
             catch (Exception e)
             {
@@ -236,6 +252,19 @@ public class OrderDetailActivity extends AppCompatActivity {
                     Toast.makeText(OrderDetailActivity.this, "Check network connection", Toast.LENGTH_SHORT).show();
                 }
             });*/
+
+
+            staticUserLocationImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Go to Map Activity
+                    Intent intent = new Intent(OrderDetailActivity.this, MapsActivity.class);
+                    intent.putExtra(Constants.MAPS_TYPE,mapType);
+                    intent.putExtra(Constants.CURRENT_USER, "Abhijit1");//userId);
+                    intent.putExtra(Constants.CURRENT_DELBOY, "Abhijit2");//delBoyId);
+                    startActivity(intent);
+                }
+            });
         }
 
 

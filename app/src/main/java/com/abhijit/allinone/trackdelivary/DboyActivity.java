@@ -40,10 +40,11 @@ public class DboyActivity extends AppCompatActivity {
 
         if(getIntent().hasExtra(Constants.CURRENT_DELBOY)) {
 
-            Intent intent = new Intent(this, OrderDetailActivity.class);
+          //  Intent intent = new Intent(this, OrderDetailActivity.class);
             // intent.putExtra(Constants.ORDER_ID, orders[which]);
-            intent.putExtra(Constants.MAPS_TYPE, "D");
-            startActivity(intent);
+          //  intent.putExtra(Constants.MAPS_TYPE, "D");
+           // startActivity(intent);
+            //finish();
 
            // String username = getIntent().getStringExtra(Constants.CURRENT_DELBOY);
            // Prefs.putString(Constants.CURRENT_DELBOY, username);
@@ -86,6 +87,8 @@ public class DboyActivity extends AppCompatActivity {
         }
 
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1) {
+
+            System.out.println("SDK init is much bigger then lollipop...................");
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     /*|| ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {*/
                 //Request for Permission
@@ -95,9 +98,16 @@ public class DboyActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
             }
         } else {
+            System.out.println("SDK init is much bigger then lollipop........else...........");
             Intent intent = new Intent(this, LocationUpdateService.class);
             startService(intent);
         }
+
+        Intent intent = new Intent(this, OrderDetailActivity.class);
+        // intent.putExtra(Constants.ORDER_ID, orders[which]);
+        intent.putExtra(Constants.MAPS_TYPE, "D");
+        startActivity(intent);
+        finish();
 
     }
 
@@ -112,6 +122,7 @@ public class DboyActivity extends AppCompatActivity {
             // If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                System.out.println("Location service Started......................");
                 Intent intent = new Intent(this, LocationUpdateService.class);
                 startService(intent);
             } else {

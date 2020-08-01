@@ -10,14 +10,23 @@
     android:orientation="vertical"
    >
 
-    <ScrollView
+    <ImageView
+        android:id="@+id/user_location_static_map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_gravity="center"
+        android:contentDescription="Location"
+        />
+
+   <!-- <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-         <!--   <TextView
+         &lt;!&ndash;   <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -114,17 +123,17 @@
                 android:visibility="gone"
                 android:textColor="@color/colorAccent"
                 style="@style/TextAppearance.AppCompat.Large"/>
--->
+&ndash;&gt;
             <ImageView
                 android:id="@+id/user_location_static_map"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="50dp"
                 android:layout_gravity="center"
                 android:contentDescription="Location"
                 />
 
         </LinearLayout>
-    </ScrollView>
+    </ScrollView>-->
 
 </LinearLayout>

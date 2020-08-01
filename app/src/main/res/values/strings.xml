@@ -11,9 +11,9 @@
     <string name="samplereview">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pretium bibendum sapien, ut euismod massa. Duis convallis sem sed turpis elementum auctor.</string>
 
 
-   <!-- <string name="google_app_id">47138010508</string>-->
+    <!-- <string name="google_app_id">47138010508</string>-->
     <string name="title_activity_maps">Map</string>
-   <!-- <string name="google_maps_key">AIzaSyAWQV_usmixs7_B_fvAIwq9Nj3IQFdfrK8</string> -->
+    <!-- <string name="google_maps_key">AIzaSyAWQV_usmixs7_B_fvAIwq9Nj3IQFdfrK8</string> -->
 
 
     <!--Other string resources also defined in this file… -->

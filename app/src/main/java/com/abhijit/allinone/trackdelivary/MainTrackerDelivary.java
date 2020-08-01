@@ -42,12 +42,18 @@ public class MainTrackerDelivary extends AppCompatActivity {
                 Intent intent = new Intent(this, DboyActivity.class);
                 intent.putExtra(Constants.CURRENT_DELBOY, user_name);
                 startActivity(intent);
+                finish();
 
         } else {
             String userId = "kalyan123";
 
-            Intent intent = new Intent(this, ShowUserOrdersActivity.class);
-            intent.putExtra(Constants.CURRENT_USER, user_name);
+           // Intent intent = new Intent(this, ShowUserOrdersActivity.class);
+           // intent.putExtra(Constants.CURRENT_USER, user_name);
+           // startActivity(intent);
+
+            Intent intent = new Intent(this, OrderDetailActivity.class);
+            //intent.putExtra(Constants.ORDER_ID, orders[i]);
+            intent.putExtra(Constants.MAPS_TYPE, "U");
             startActivity(intent);
         }
 

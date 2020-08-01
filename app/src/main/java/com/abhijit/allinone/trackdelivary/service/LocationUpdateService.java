@@ -88,7 +88,7 @@ public class LocationUpdateService extends Service implements LocationListener, 
         }
         if(Prefs.getString(Constants.CURRENT_DELBOY, null) == null) {
             //wakeLock.release();
-            stopSelf();
+           stopSelf();
         }
     }
 
