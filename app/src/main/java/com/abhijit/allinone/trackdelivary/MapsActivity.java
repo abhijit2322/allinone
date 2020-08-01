@@ -97,10 +97,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         if (mapType != null && mapType.equals("D")) {
-            Double lati=15.317277;
-           Double lang=75.713890;
-            UserDetails.cit_lati=Double.toString(lati);
-            UserDetails.cit_lang=Double.toString(lang);
+           // Double lati=12.975676; //12.975676, 77.677849.
+          // Double lang=77.677849;
+           // UserDetails.cit_lati=Double.toString(lati);
+           // UserDetails.cit_lang=Double.toString(lang);
+
+            System.out.println("Citizen The Lat and Lang is Map Activity >>>>>>>>>>>>>>>>>>> "+UserDetails.cit_lati+ " "+ UserDetails.cit_lang);
+            System.out.println("Service The Lat and Lang is Map Activity >>>>>>>>>>>>>>>>>>> "+UserDetails.ser_lati+ " "+ UserDetails.ser_lang);
 
             LatLng latLan = new LatLng(Double.parseDouble(UserDetails.cit_lati), Double.parseDouble(UserDetails.cit_lang));//(String) dataSnapshot.child("currentLocation").getValue();
             //LatLng latLan = new LatLng( Double.parseDouble(UserDetails.cit_lang),Double.parseDouble(UserDetails.cit_lati));

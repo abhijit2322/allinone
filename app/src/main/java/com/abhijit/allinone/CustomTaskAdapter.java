@@ -175,8 +175,8 @@ public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnCl
                 {
                     e.printStackTrace();
                 }
-                context.startActivity(new Intent(context, MainTrackerDelivary.class));//TaskAssignment.class));
-                context.finish();
+                 context.startActivity(new Intent(context, MainTrackerDelivary.class));//TaskAssignment.class));
+                 context.finish();
                 break;
 
             case R.id.img2:

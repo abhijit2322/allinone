@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -57,6 +58,10 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
     String com_lang="";
     String com_lati="";
 
+    private static final int REQUEST_LOCATION = 1;
+    LocationManager locationManager;
+    String latitude, longitude;
+
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
@@ -75,7 +80,16 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();//
         initFireBaseCallbacks();
-        fetchLocation();
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+        System.out.println("GPS provider not found");
+        }
+
+
+            fetchLocation();
+        getLocation();
     }
 
     void initFields() {
@@ -144,8 +158,10 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                         UserDetails.username=etPhone.getText().toString();
                         //UserDetails.cit_lang=" ";
                        // UserDetails.cit_lati=" ";
-                       // UserDetails.ser_lang=com_lang;
-                        //UserDetails.ser_lati=com_lati;;
+                         Double s_lati=12.840711;
+                         Double s_lang=77.676369;
+                         UserDetails.ser_lati=Double.toString(s_lati);
+                         UserDetails.ser_lang=Double.toString(s_lang);;
                         startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
                         finish();
                        // UserDetails.userType="Service Provider";
@@ -308,6 +324,25 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                 }
             }
         });
+    }
+
+    private void getLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION);
+        } else {
+            Location locationGPS = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (locationGPS != null) {
+                double lat = locationGPS.getLatitude();
+                double longi = locationGPS.getLongitude();
+                latitude = String.valueOf(lat);
+                longitude = String.valueOf(longi);
+                System.out.println("getLocation() Your Location: " + "\n" + "Latitude: " + latitude + "\n" + "Longitude: " + longitude);
+            } else {
+                Toast.makeText(this, "Unable to find location.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 }
