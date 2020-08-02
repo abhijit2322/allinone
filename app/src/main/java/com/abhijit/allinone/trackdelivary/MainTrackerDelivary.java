@@ -45,12 +45,10 @@ public class MainTrackerDelivary extends AppCompatActivity {
                 finish();
 
         } else {
-            String userId = "kalyan123";
-
+           // String userId = "kalyan123";
            // Intent intent = new Intent(this, ShowUserOrdersActivity.class);
            // intent.putExtra(Constants.CURRENT_USER, user_name);
            // startActivity(intent);
-
             Intent intent = new Intent(this, OrderDetailActivity.class);
             //intent.putExtra(Constants.ORDER_ID, orders[i]);
             intent.putExtra(Constants.MAPS_TYPE, "U");

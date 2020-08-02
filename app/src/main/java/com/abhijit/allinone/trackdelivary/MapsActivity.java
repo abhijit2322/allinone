@@ -70,7 +70,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.show_directions_menu:
-                System.out.println("User Location "+userLocation);
+                System.out.println("User Location >>>>>>>>>>>>>>>>>>>>>>>"+userLocation);
                 Uri gmmIntentUri = Uri.parse("google.navigation:q=" + userLocation);
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
@@ -106,8 +106,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             System.out.println("Service The Lat and Lang is Map Activity >>>>>>>>>>>>>>>>>>> "+UserDetails.ser_lati+ " "+ UserDetails.ser_lang);
 
             LatLng latLan = new LatLng(Double.parseDouble(UserDetails.cit_lati), Double.parseDouble(UserDetails.cit_lang));//(String) dataSnapshot.child("currentLocation").getValue();
-            //LatLng latLan = new LatLng( Double.parseDouble(UserDetails.cit_lang),Double.parseDouble(UserDetails.cit_lati));
-            userLocation = UserDetails.cit_lati+","+UserDetails.cit_lang;
+           // LatLng latLan = new LatLng( Double.parseDouble(UserDetails.ser_lati),Double.parseDouble(UserDetails.ser_lang));
+
+            // userLocation = UserDetails.cit_lati+","+UserDetails.cit_lang;
+             userLocation = UserDetails.ser_lati+","+UserDetails.ser_lang;
+             //userLocation = UserDetails.cit_lati+","+UserDetails.cit_lang;
              LatLng location = latLan;//new LatLng(Double.parseDouble(latLang.split(Constants.LOCATION_DELIMITER)[0]), Double.parseDouble(latLang.split(Constants.LOCATION_DELIMITER)[1]));
              lastMarker = mMap.addMarker(new MarkerOptions().position(location).title("User is here"));
              mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
@@ -133,9 +136,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             if (lastMarker != null) {
                 lastMarker.remove();
             }
-           // String latLang = (String) dataSnapshot.child("currentLocation").getValue();
-            LatLng latLan = new LatLng(Double.parseDouble(UserDetails.ser_lati), Double.parseDouble(UserDetails.ser_lang));
+
             delBoyLocation = UserDetails.ser_lati+","+UserDetails.ser_lang;
+            userLocation = UserDetails.ser_lati+","+UserDetails.ser_lang;
+           // String latLang = (String) dataSnapshot.child("currentLocation").getValue();
+            LatLng latLan = new LatLng(Double.parseDouble(UserDetails.cit_lati), Double.parseDouble(UserDetails.cit_lang));
+
             Bitmap icon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_directions_bike_black_24dp);
             LatLng location = latLan;//new LatLng(Double.parseDouble(latLang.split(Constants.LOCATION_DELIMITER)[0]), Double.parseDouble(latLang.split(Constants.LOCATION_DELIMITER)[1]));
             lastMarker = mMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.fromBitmap(icon)).position(location).title("Your Order is here"));

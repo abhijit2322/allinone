@@ -13,6 +13,7 @@ public class UserDetails {
     public static String cit_lati=" ";
     public static String ser_lang=" ";
     public static String ser_lati=" ";
+    public static String came_from="";
 
 
 

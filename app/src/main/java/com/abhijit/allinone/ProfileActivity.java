@@ -147,14 +147,23 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 //actions
-               startActivity(new Intent(getApplicationContext(), RegistrationForm.class));
+                if( UserDetails.came_from.equals("Display_Sms_Call"))
+                {
+                    startActivity(new Intent(getApplicationContext(), Display_Sms_Call.class));
+                }
+                else{
+
+                 startActivity(new Intent(getApplicationContext(), RegistrationForm.class));
+            }
             }
 
         });
         gotask.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                startActivity(new Intent(getApplicationContext(), TaskAssignment.class));
+                if( !UserDetails.came_from.equals("Display_Sms_Call")) {
+                    startActivity(new Intent(getApplicationContext(), TaskAssignment.class));
+                }
             }
 
         });

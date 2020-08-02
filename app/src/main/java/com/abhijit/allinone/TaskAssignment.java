@@ -59,6 +59,8 @@ public class TaskAssignment extends AppCompatActivity {
     String citizenRequest="";
     String sub_folder;
     ArrayList<String> taskList = new ArrayList<>();
+    ArrayList<Integer> imageID = new ArrayList<>();
+    ArrayList<Boolean> taskstatus = new ArrayList<>();
 
     CustomTaskAdapter ser_adapter;
     CitizenTaskAdapter ci_adapter;
@@ -98,6 +100,26 @@ public class TaskAssignment extends AppCompatActivity {
             R.drawable.task_complete,
             R.drawable.task_complete,
             R.drawable.task_complete
+
+    };
+    Integer[] cit_imageId1 = {
+            R.drawable.task_start1,
+            R.drawable.task_start1,
+            R.drawable.task_start1,
+            R.drawable.task_start1,
+            R.drawable.task_start1,
+            R.drawable.task_start1,
+            R.drawable.task_start1
+
+    };
+    Integer[] cit_imageId2 = {
+            R.drawable.task_start2,
+            R.drawable.task_start2,
+            R.drawable.task_start2,
+            R.drawable.task_start2,
+            R.drawable.task_start2,
+            R.drawable.task_start2,
+            R.drawable.task_start2
 
     };
 
@@ -224,7 +246,7 @@ public class TaskAssignment extends AppCompatActivity {
         Date date = cal.getTime();
         String todaysdate = dateFormat.format(date);
         System.out.println("Today's date : " + todaysdate);
-        TodoTask user = new TodoTask(task_details,UserDetails.username,UserDetails.chatWith,UserDetails.charges,todaysdate,"  ",false,"No","no ","started",UserDetails.cit_lang,UserDetails.cit_lati,UserDetails.ser_lang,UserDetails.ser_lati);
+        TodoTask user = new TodoTask(task_details,UserDetails.username,UserDetails.chatWith,UserDetails.charges,todaysdate,"  ",false,"No","no ","initiated",UserDetails.cit_lang,UserDetails.cit_lati,UserDetails.ser_lang,UserDetails.ser_lati);
 
         mDbRef.child(userId+"/"+sub_folder).setValue(user);
 
@@ -251,6 +273,14 @@ public class TaskAssignment extends AppCompatActivity {
 
         taskList.clear();
         Log.d(TAG, "Read task called in on save task..............");
+
+        try {
+            Thread.sleep(5000); //1000 milliseconds is one second.
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
         Read_Task();
 
     }
@@ -291,6 +321,7 @@ public class TaskAssignment extends AppCompatActivity {
                             String asignee_number=(String)final_next.child("assigned_by").getValue();
                             String cit_lang=(String)final_next.child("cit_lang").getValue();
                             String cit_lati=(String)final_next.child("cit_lati").getValue();
+                            String task_status=(String)final_next.child("task_status").getValue();
                             Log.i(TAG, "Abhijit >> sub Task value = "+accept_reject +"   taskname "+Taskname+" Accepted by "+accepted_by+" Accepted by "+UserDetails.username);
                             if (accepted_by.contains(UserDetails.username)) {
                                 Log.i(TAG, "Abhijit >> Accepted by................");
@@ -302,6 +333,16 @@ public class TaskAssignment extends AppCompatActivity {
                             if ((asignee_number.contains(UserDetails.username)))
                             {
                                 Log.i(TAG, "Abhijit >> Assignee by...............");
+                                if(task_status.equals("started"))
+                                {
+                                    imageID.add(cit_imageId1[0]);
+                                    taskstatus.add(true);
+                                }
+                                else
+                                {
+                                    imageID.add(cit_imageId2[0]);
+                                    taskstatus.add(false);
+                                }
                                 taskList.add(Taskname);
                                 task_number++;
                             }
@@ -313,19 +354,19 @@ public class TaskAssignment extends AppCompatActivity {
 
                     if(UserDetails.userType.equals("Citizen")){
                          ci_adapter = new
-                                CitizenTaskAdapter(TaskAssignment.this, taskList);
+                                CitizenTaskAdapter(TaskAssignment.this, taskList,imageID,taskstatus);
 
                         MTaskListView = (ListView) findViewById(R.id.list_todo);
                         MTaskListView.setAdapter(ci_adapter);
-                       /* MTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                         MTaskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view,
                                                     int position, long id) {
-                                Toast.makeText(TaskAssignment.this, "You Clicked at " +  position, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(TaskAssignment.this, "Citizen  You Clicked at " +  position, Toast.LENGTH_SHORT).show();
 
                             }
-                        });*/
+                        });
                     }
                     else {
                         if(ser_adapter==null) {
@@ -343,7 +384,7 @@ public class TaskAssignment extends AppCompatActivity {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view,
                                                         int position, long id) {
-                                    Toast.makeText(TaskAssignment.this, "You Clicked at " + position, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(TaskAssignment.this, " Service You Clicked at " + position, Toast.LENGTH_SHORT).show();
 
                                 }
                             });

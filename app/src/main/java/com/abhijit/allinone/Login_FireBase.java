@@ -152,6 +152,9 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                 //if(Phone.trim().contains(etPhone.getText().toString().trim()))
             if(Phone.contains(etPhone.getText().toString()))
                 {
+
+
+
                     if(logintype.contains("Service Provider"))
                     {
                         UserDetails.userType="Service Provider";
@@ -162,8 +165,8 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                          Double s_lang=77.676369;
                          UserDetails.ser_lati=Double.toString(s_lati);
                          UserDetails.ser_lang=Double.toString(s_lang);;
-                        startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
-                        finish();
+                       // startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
+                     //   finish();
                        // UserDetails.userType="Service Provider";
                        // startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
                         //finish();

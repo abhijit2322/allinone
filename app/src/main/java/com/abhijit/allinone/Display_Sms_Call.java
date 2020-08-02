@@ -2,6 +2,7 @@ package com.abhijit.allinone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -153,8 +154,10 @@ public class Display_Sms_Call extends AppCompatActivity {
                      @Override
                      public void onItemClick(AdapterView<?> parent, View view,
                                              int position, long id) {
-                         Toast.makeText(Display_Sms_Call.this, "You Clicked at " + al.get(position), Toast.LENGTH_SHORT).show();
-
+                         UserDetails.came_from="Display_Sms_Call";
+                         Toast.makeText(Display_Sms_Call.this, " SMS and call You Clicked at " + al.get(position), Toast.LENGTH_SHORT).show();
+                         startActivity(new Intent(getApplicationContext(), ProfileDisplay.class));//TaskAssignment.class));
+                         finish();
                      }
                  });
              }

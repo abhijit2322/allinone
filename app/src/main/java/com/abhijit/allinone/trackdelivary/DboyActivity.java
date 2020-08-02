@@ -98,10 +98,13 @@ public class DboyActivity extends AppCompatActivity {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_REQUEST_CODE);
             }
         } else {
-            System.out.println("SDK init is much bigger then lollipop........else...........");
+            System.out.println("SDK init is much bigger then lollipop........else........Location Service started.......");
             Intent intent = new Intent(this, LocationUpdateService.class);
             startService(intent);
         }
+
+        Intent intent_service = new Intent(this, LocationUpdateService.class);
+        startService(intent_service);
 
         Intent intent = new Intent(this, OrderDetailActivity.class);
         // intent.putExtra(Constants.ORDER_ID, orders[which]);
@@ -118,6 +121,7 @@ public class DboyActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        System.out.println("LocationUpdateService  Started......................1");
         if(requestCode == LOCATION_REQUEST_CODE) {
             // If request is cancelled, the result arrays are empty.
             if (grantResults.length > 0

@@ -253,6 +253,8 @@ public class CustomTaskAdapter extends ArrayAdapter<String> implements View.OnCl
                             }
                             if(updateValue.equals("accept")) {
                                 mDbRef.child("task_status").setValue("started");
+                                mDbRef.child("ser_lati").setValue(UserDetails.ser_lati);
+                                mDbRef.child("ser_lang").setValue(UserDetails.ser_lang);
                                // UserDetails.chatWith=asignee_number;
                                 // mDbRef.child(final_next).child()
                             }

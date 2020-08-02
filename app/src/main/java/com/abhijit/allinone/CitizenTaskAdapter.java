@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abhijit.allinone.trackdelivary.MainTrackerDelivary;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,20 +62,28 @@ import java.util.Iterator;
 
 import static android.app.Activity.RESULT_OK;
 
-public class CitizenTaskAdapter extends ArrayAdapter<String> {
-    private static final String TAG = "CustomTaskAdapter";
+public class CitizenTaskAdapter extends ArrayAdapter<String> implements View.OnClickListener {
+    private static final String TAG = "CitizenTaskAdapter";
     private final Activity context;
     //private final String[] web;
 
     public int positionG=0;
     ArrayList<String> web = new ArrayList<>();
-    String REGISTER_NUMBER="93430771993";
-    String LOGIN_SERVICE_MAN="83430771990";
+  /*  String REGISTER_NUMBER="93430771993";
+    String LOGIN_SERVICE_MAN="83430771990";*/
+
+    String REGISTER_NUMBER=UserDetails.username;
+    String LOGIN_SERVICE_MAN=UserDetails.username;
+
+   // private final Integer[] imageId;
 
     ArrayList<String> taskList = new ArrayList<>();
+    ArrayList<Integer> imageid = new ArrayList<>();
+    ArrayList<Boolean> task_status = new ArrayList<>();
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mDbRef;
+    TextView txtTitle;
 
     private String userId;
     private String selectedTaskName;
@@ -86,65 +95,74 @@ public class CitizenTaskAdapter extends ArrayAdapter<String> {
 
     }
     public CitizenTaskAdapter(Activity context,
-                             ArrayList<String> web) {
+                             ArrayList<String> web,ArrayList<Integer> imageId,ArrayList<Boolean> taskstatues) {
 
 
         super(context, R.layout.task_citizen_adapter, web);
         this.context = context;
         this.web = web;
+        this.imageid=imageId;
+        this.task_status=taskstatues;
 
     }
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.task_citizen_adapter, null, true);
-        TextView txtTitle = (TextView) rowView.findViewById(R.id.txt);
-
+        txtTitle= (TextView) rowView.findViewById(R.id.txt);
+        ImageView imageView1 = (ImageView) rowView.findViewById(R.id.img1);
         positionG=position;
-
-        // System.out.println("The List text is "+web.get(position));
         txtTitle.setText(web.get(position));
+        imageView1.setImageResource(imageid.get(position));
+        task_status.set(position,task_status.get(position));
+        imageView1.setTag(positionG);
+//ProfileDisplay
+        imageView1.setOnClickListener(this);
+        return rowView;
+    }
 
-        // imageView1.setImageResource(imageId1[position]);
-        //imageView2.setImageResource(imageId2[position]);
+    @Override
+    public void onClick(View v) {
 
-       /* imageView1.setOnClickListener(new View.OnClickListener() {
-            String s = web.get(positionG);;//imageId1[positionG];
-            @Override
-            public void onClick(View v) {
+        int position=(Integer) v.getTag();
+        Object object= getItem(position);
+        System.out.println("The number is >>>>>>>>>>>>>>>position>>>>>"+object.toString()+"Position is "+position);
+        System.out.println("The number status is >>>>>>>>>>>value>>>>>"+object.toString()+"Position is "+task_status.get(position));
+        // DataModel dataModel=(DataModel)object;
 
+        switch (v.getId()) {
+            case R.id.img1:
+                System.out.println("The number  Accept is >>>>>>>>>>>>>>>>>>>>"+object.toString()+" Position is "+position);
                 UserDetails.chatWith = web.get(positionG);
                 UserDetails.username=REGISTER_NUMBER;
-                //Intent i =new Intent();
-                //Intent intent = new Intent(context, FirebaseMainChatActivity.class);
-                Toast.makeText(context, "select "+s ,Toast.LENGTH_SHORT).show();
-                selectedTaskName=s;//web.get(positionG);
-                Update_Task("true",selectedTaskName);
-                //Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
+                selectedTaskName=object.toString();//web.get(positionG);
+                if(task_status.get(position))
+                {
+                    UserDetails.chatWith = web.get(positionG);
+                    UserDetails.username=REGISTER_NUMBER;
+                    context.startActivity(new Intent(context, MainTrackerDelivary.class));//TaskAssignment.class));
+                    context.finish();
+                }
+               // Update_Task("started",selectedTaskName);
+              /*  try {
+                    Thread.sleep(2000); //1000 milliseconds is one second.
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }*/
+               // context.startActivity(new Intent(context, MainTrackerDelivary.class));//TaskAssignment.class));
+               // context.finish();
+                break;
 
-                context.startActivity(new Intent(context, TaskAssignment.class));
-                context.finish();
-                //Intent intent = getIntent();//TaskAssignment
+            case R.id.img0:
+                /*context.startActivity(new Intent(context, ProfileDisplay.class));//TaskAssignment.class));
+                context.finish();*/
+                break;
 
-            }
-        });*/
-
-       /* imageView2.setOnClickListener(new View.OnClickListener() {
-            String s = web.get(positionG);//items[position];
-
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context,"select"+s, Toast.LENGTH_SHORT).show();
-                selectedTaskName=s;//web.get(positionG);
-                Update_Task("false",selectedTaskName);
-
-                context.startActivity(new Intent(context, TaskAssignment.class));
-                context.finish();
-            }
-        });*/
+        }
 
 
-        return rowView;
     }
 
 

@@ -42,7 +42,7 @@ public class LocationUpdateService extends Service implements LocationListener, 
     @Override
     public void onCreate() {
         super.onCreate();
-
+        System.out.println("LocationUpdateService  oncreate......................1");
         //Wake Lock to send in background
         //PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
         //wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "DoNotSleep");
@@ -56,20 +56,24 @@ public class LocationUpdateService extends Service implements LocationListener, 
         }
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(Constants.LOCATION_UPDATE_INTERVAL);
-        mLocationRequest.setFastestInterval(Constants.LOCATION_FAST_UPDATE_INTERVAL);
+        mLocationRequest.setInterval(5000);
+        mLocationRequest.setFastestInterval(1000);
 
         Toast.makeText(LocationUpdateService.this, "Location Change service called", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+
+        System.out.println("LocationUpdateService  Started....on start command..................1");
         mGoogleApiClient.connect();
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public void onLocationChanged(Location location) {
+
+        System.out.println("LocationUpdateService  Started.........on location change.............1");
         if(location != null && NetworkUtil.isConnected(this)) {
             //Store the date in Firebase
             /*Realm realm = Realm.getDefaultInstance();
@@ -83,8 +87,12 @@ public class LocationUpdateService extends Service implements LocationListener, 
                 Toast.makeText(LocationUpdateService.this, "Location Change failed because of null user", Toast.LENGTH_SHORT).show();
                 stopSelf();
             }*/
-            UserDetails.ser_lati=Double.toString(location.getLatitude());
-            UserDetails.ser_lang=Double.toString(location.getLongitude());
+
+            System.out.println("LocationUpdateService  Started.........on location change.............1(lati)"+location.getLatitude());
+            System.out.println("LocationUpdateService  Started.........on location change.............1(lang)"+location.getLongitude());
+
+            // UserDetails.ser_lati=Double.toString(location.getLatitude());
+           // UserDetails.ser_lang=Double.toString(location.getLongitude());
         }
         if(Prefs.getString(Constants.CURRENT_DELBOY, null) == null) {
             //wakeLock.release();
@@ -94,6 +102,7 @@ public class LocationUpdateService extends Service implements LocationListener, 
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
+        System.out.println("LocationUpdateService  Started..........on connected............1");
         Toast.makeText(LocationUpdateService.this, "On Connected API client in Service", Toast.LENGTH_SHORT).show();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission_group.LOCATION) == PackageManager.PERMISSION_GRANTED) {
             LocationServices.FusedLocationApi.requestLocationUpdates(
@@ -114,6 +123,7 @@ public class LocationUpdateService extends Service implements LocationListener, 
     public void onDestroy() {
         super.onDestroy();
         //wakeLock.release();
+        System.out.println("LocationUpdateService  Started..........on Destroy............1");
         LocationServices.FusedLocationApi.removeLocationUpdates(
                 mGoogleApiClient, this);
     }
