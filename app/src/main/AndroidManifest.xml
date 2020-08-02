@@ -32,7 +32,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCWuwTS9OLQZGs2F3gWfmI1x5MA2TGxUIc" /> <!-- <activity android:name=".DashBoard"> -->
-        <activity android:name=".Login_FireBase">
+        <activity android:name=".drivingmap.MapsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -72,7 +72,7 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".trackdelivary.ShowUserOrdersActivity" />
         <activity android:name=".trackdelivary.Delivarymap" />
-        <activity android:name=".drivingmap.MapsActivity" />
+        <activity android:name=".Login_FireBase" />
         <activity android:name=".ProfileDisplay"/>
     </application>
 

@@ -316,7 +316,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
             public void onSuccess(Location location) {
                 if (location != null) {
                     currentLocation = location;
-                    Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(getApplicationContext(), currentLocation.getLatitude() + "" + currentLocation.getLongitude(), Toast.LENGTH_SHORT).show();
                     com_lang=Double.toString(currentLocation.getLongitude());
                     com_lati=Double.toString(currentLocation.getLatitude());
                     System.out.println("Abhijit Your Lat...."+currentLocation.getLatitude()+"  Your Lang  "+currentLocation.getLongitude());

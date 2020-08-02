@@ -272,10 +272,9 @@ public class TaskAssignment extends AppCompatActivity {
         //MTaskListView.getAdapter().notifyAll();//notifyDataSetChanged();
 
         taskList.clear();
-        Log.d(TAG, "Read task called in on save task..............");
 
         try {
-            Thread.sleep(5000); //1000 milliseconds is one second.
+            Thread.sleep(2000); //1000 milliseconds is one second.
         }
         catch (InterruptedException e)
         {
@@ -335,11 +334,13 @@ public class TaskAssignment extends AppCompatActivity {
                                 Log.i(TAG, "Abhijit >> Assignee by...............");
                                 if(task_status.equals("started"))
                                 {
+                                    Log.i(TAG, "Abhijit >> Assignee by..........Started........................");
                                     imageID.add(cit_imageId1[0]);
                                     taskstatus.add(true);
                                 }
                                 else
                                 {
+                                    Log.i(TAG, "Abhijit >> Assignee by.....Yet..to..Started........................");
                                     imageID.add(cit_imageId2[0]);
                                     taskstatus.add(false);
                                 }
@@ -367,6 +368,7 @@ public class TaskAssignment extends AppCompatActivity {
 
                             }
                         });
+                        ci_adapter.notifyDataSetInvalidated();
                     }
                     else {
                         if(ser_adapter==null) {
