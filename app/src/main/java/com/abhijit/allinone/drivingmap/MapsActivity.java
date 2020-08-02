@@ -58,7 +58,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        LatLng sydney = new LatLng(-34, 151);
+        //LatLng sydney = new LatLng(-34, 151);
+        LatLng sydney = new LatLng(12, 77);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16));
 
@@ -159,8 +160,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return routes;
         }
 
-        @Override
-        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+       // @Override
+        protected void onPostExecute5(List<List<HashMap<String, String>>> result) {
             ArrayList points = null;
             PolylineOptions lineOptions = null;
             MarkerOptions markerOptions = new MarkerOptions();
@@ -191,7 +192,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 // Drawing polyline in the Google Map for the i-th route
             mMap.addPolyline(lineOptions);
         }
+
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+            ArrayList<LatLng> points = new ArrayList<LatLng>();;
+            PolylineOptions lineOptions = new PolylineOptions();;
+            lineOptions.width(2);
+            lineOptions.color(Color.RED);
+            MarkerOptions markerOptions = new MarkerOptions();
+            // Traversing through all the routes
+            for(int i=0;i<result.size();i++){
+                // Fetching i-th route
+                List<HashMap<String, String>> path = result.get(i);
+                // Fetching all the points in i-th route
+                for(int j=0;j<path.size();j++){
+                    HashMap<String,String> point = path.get(j);
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lng = Double.parseDouble(point.get("lng"));
+                    LatLng position = new LatLng(lat, lng);
+                    points.add(position);
+                }
+                // Adding all the points in the route to LineOptions
+                lineOptions.addAll(points);
+
+            }
+            // Drawing polyline in the Google Map for the i-th route
+            if(points.size()!=0)mMap.addPolyline(lineOptions);//to avoid crash
+        }
     }
+
+
 
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
 
