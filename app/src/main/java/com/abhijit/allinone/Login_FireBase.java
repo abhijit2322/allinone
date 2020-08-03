@@ -165,7 +165,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                          Double s_lang=77.676369;
                          UserDetails.ser_lati=Double.toString(s_lati);
                          UserDetails.ser_lang=Double.toString(s_lang);;
-                        startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
+                        startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
                      //   finish();
                        // UserDetails.userType="Service Provider";
                        // startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
@@ -247,15 +247,36 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                                     if (occopastion.contains("Service Provider"))
                                     {
 
-                                        finish();
+                                       // finish();
+                                        //UserDetails.userType="Service Provider";
+                                        //startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
+
+
                                         UserDetails.userType="Service Provider";
-                                        startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
+                                        UserDetails.username=etPhone.getText().toString();
+                                        //UserDetails.cit_lang=" ";
+                                        // UserDetails.cit_lati=" ";
+                                        Double s_lati=12.840711; //com_lati
+                                        Double s_lang=77.676369; //com_lang
+                                        UserDetails.ser_lati=Double.toString(s_lati);
+                                        UserDetails.ser_lang=Double.toString(s_lang);;
+                                        startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
                                     }
                                     else
                                     {
-                                        finish();
+                                       // finish();
+                                       // UserDetails.userType="Citizen";
+                                       // startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
+
                                         UserDetails.userType="Citizen";
-                                        startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
+                                        UserDetails.username=etPhone.getText().toString();
+
+                                        UserDetails.cit_lang=com_lang;
+                                        UserDetails.cit_lati=com_lati;
+                                        //UserDetails.ser_lang=" ";
+                                        //UserDetails.ser_lati=" ";
+
+                                        startActivity(new Intent(Login_FireBase.this, CitizenDashboard.class));//ImageGrid.class));
                                     }
                                 } else {
                                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
