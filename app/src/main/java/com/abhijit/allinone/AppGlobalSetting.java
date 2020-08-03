@@ -213,12 +213,12 @@ public class AppGlobalSetting {
 
 
     public static Integer[] thumbImages_house = {
-            R.drawable.realestate, R.drawable.graduation,
-            R.drawable.consult, R.drawable.dress_shop,
-            R.drawable.grocery, R.drawable.veg_shop,
-            R.drawable.meat_fish, R.drawable.construction,
-            R.drawable.ent_icon, R.drawable.lovely_time,
-            R.drawable.medical/*, R.drawable.me_time,
+            R.drawable.painter, R.drawable.plumber,
+            R.drawable.electrician, R.drawable.water_supply,
+            R.drawable.carrent, R.drawable.kitchen,
+            R.drawable.gas_refil, R.drawable.courier,
+            R.drawable.retirement, R.drawable.house_cleaning,
+            R.drawable.laundry/*, R.drawable.me_time,
             R.drawable.paintbrush, R.drawable.playstore,
             R.drawable.settings, R.drawable.star,
             R.drawable.suggestion, R.drawable.team_time,
@@ -255,8 +255,8 @@ public class AppGlobalSetting {
 
 
     public static Integer[] thumbImages_education = {
-            R.drawable.realestate, R.drawable.graduation,
-            R.drawable.consult/*, R.drawable.dress_shop,
+            R.drawable.tution, R.drawable.book_shop,
+            R.drawable.edu_inst/*, R.drawable.dress_shop,
             R.drawable.grocery, R.drawable.veg_shop,
             R.drawable.meat_fish, R.drawable.construction,
             R.drawable.ent_icon, R.drawable.lovely_time,
@@ -297,10 +297,10 @@ public class AppGlobalSetting {
 
 
     public static Integer[] thumbImages_medical = {
-            R.drawable.realestate, R.drawable.consult,
-            R.drawable.grocery, R.drawable.veg_shop,
-            R.drawable.meat_fish, R.drawable.construction,
-            R.drawable.ent_icon/*, R.drawable.lovely_time,
+            R.drawable.test_centre, R.drawable.medi_house,
+            R.drawable.doctor, R.drawable.nurse,
+            R.drawable.hospital, R.drawable.ambulance,
+            R.drawable.medical_shop/*, R.drawable.lovely_time,
             R.drawable.medical, R.drawable.me_time,
             R.drawable.paintbrush, R.drawable.playstore,
             R.drawable.settings, R.drawable.star,
@@ -336,10 +336,10 @@ public class AppGlobalSetting {
 
 
     public static Integer[] thumbImages_construction = {
-            R.drawable.realestate, R.drawable.graduation,
-            R.drawable.consult, R.drawable.dress_shop,
-            R.drawable.grocery, R.drawable.veg_shop,
-            R.drawable.meat_fish, R.drawable.construction
+            R.drawable.contrcutor, R.drawable.sand_shop,
+            R.drawable.painting_shop, R.drawable.cement_shop,
+            R.drawable.briks_shop, R.drawable.woodshop,
+            R.drawable.glass_shop, R.drawable.iron_shop
             /*R.drawable.ent_icon, R.drawable.lovely_time,
             R.drawable.medical, R.drawable.me_time,
             R.drawable.paintbrush, R.drawable.playstore,
@@ -379,9 +379,9 @@ public class AppGlobalSetting {
 
 
     public static Integer[] thumbImages_entertainment = {
-            R.drawable.realestate, R.drawable.graduation,
-            R.drawable.consult, R.drawable.dress_shop,
-            R.drawable.grocery, R.drawable.veg_shop/*,
+            R.drawable.ticket_booking, R.drawable.light_food,
+            R.drawable.bill_sub, R.drawable.gym,
+            R.drawable.carrent, R.drawable.retirement/*,
             R.drawable.meat_fish, R.drawable.construction,
             R.drawable.ent_icon, R.drawable.lovely_time,
             R.drawable.medical, R.drawable.me_time,
