@@ -24,17 +24,33 @@ tools:context=".Login_FireBase">
 <!--    android:layout_marginTop="15dp"-->
 <!--    android:text="Send Otp" />-->
 
+    <TextView
+        android:id="@+id/TextViewTitle5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Login Type"
+        android:textSize="8pt">
+    </TextView>
 
+    <Spinner
+        android:id="@+id/occopassion"
+        android:layout_height="70dp"
+        android:prompt="@string/occupation_selector"
+        android:layout_width="fill_parent"
+        android:entries="@array/loginmethod">
+    </Spinner>
 
     <TableRow
         android:id="@+id/tableRow1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp" >
+
+
         <ImageButton
             android:id="@+id/bt_send_otp"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_toRightOf="@+id/et_phone"
             android:layout_marginLeft="120dp"
             android:background="@drawable/otp_send" />
@@ -42,8 +58,8 @@ tools:context=".Login_FireBase">
 
         <ImageButton
             android:id="@+id/resend"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="20dp"
             android:background="@drawable/resend" />
     </TableRow>
@@ -79,20 +95,20 @@ tools:context=".Login_FireBase">
         android:background="@drawable/verified" />
 
 
-    <TextView
+   <!-- <TextView
         android:id="@+id/TextViewTitle5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enter Occupasion  *"
         android:textSize="10pt">
-    </TextView>
-    <Spinner
+    </TextView>-->
+   <!-- <Spinner
         android:id="@+id/occopassion"
         android:layout_height="wrap_content"
         android:prompt="@string/occupation_selector"
         android:layout_width="fill_parent"
         android:entries="@array/loginmethod">
-    </Spinner>
+    </Spinner>-->
 
 
 

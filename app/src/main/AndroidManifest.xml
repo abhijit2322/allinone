@@ -17,8 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CitizenDashboard"></activity>
-        <activity android:name=".ServiceDashboard" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -75,6 +74,8 @@
         <activity android:name=".trackdelivary.Delivarymap" />
         <activity android:name=".drivingmap.MapsActivity" />
         <activity android:name=".ProfileDisplay" />
+        <activity android:name=".CitizenDashboard"/>
+        <activity android:name=".ServiceDashboard" />
     </application>
 
 </manifest>

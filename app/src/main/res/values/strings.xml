@@ -42,6 +42,7 @@
     <string name="painter">Painter</string>
     <string name="sign_out">Sign Out</string>
     <string name="occupation_selector">Gender Selection</string>
+    <string name="login_type">Select Login Type </string>
     <string name="service_provider">Service Provider</string>
     <string name="customer">Citizen</string>
 
