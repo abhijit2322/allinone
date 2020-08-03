@@ -29,12 +29,53 @@
             android:textSize="10pt">
         </TextView>
 
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Images for Advertisement"
+            android:layout_below="@id/tv2"
+            android:textSize="10pt">
+        </TextView>
+
+        <ImageView
+            android:id="@+id/imv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv3"
+            android:src="@drawable/android" />
+
+        <ImageView
+            android:id="@+id/imv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imv1"
+            android:src="@drawable/android" />
+        <ImageView
+            android:id="@+id/imv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imv2"
+            android:src="@drawable/android" />
+        <ImageView
+            android:id="@+id/imv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imv3"
+            android:src="@drawable/android" />
+        <ImageView
+            android:id="@+id/imv5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imv4"
+            android:src="@drawable/android" />
+
         <ImageButton
             android:id="@+id/go_right"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginLeft="190dp"
-            android:layout_below="@id/tv2"
+            android:layout_below="@id/imv5"
             android:layout_alignParentBottom="true"
             android:tooltipText="Place New task"
             android:src="@drawable/gofront" />
