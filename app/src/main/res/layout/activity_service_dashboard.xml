@@ -43,32 +43,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv3"
-            android:src="@drawable/android" />
+            android:src="@drawable/add_banner" />
 
         <ImageView
             android:id="@+id/imv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imv1"
-            android:src="@drawable/android" />
+            android:src="@drawable/add_banner2" />
         <ImageView
             android:id="@+id/imv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imv2"
-            android:src="@drawable/android" />
+            android:src="@drawable/add_banner2" />
         <ImageView
             android:id="@+id/imv4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imv3"
-            android:src="@drawable/android" />
+            android:src="@drawable/add_banner" />
         <ImageView
             android:id="@+id/imv5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imv4"
-            android:src="@drawable/android" />
+            android:src="@drawable/add_banner2" />
 
         <ImageButton
             android:id="@+id/go_right"
