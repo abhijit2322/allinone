@@ -380,7 +380,7 @@ public class AppGlobalSetting {
 
     public static Integer[] thumbImages_entertainment = {
             R.drawable.ticket_booking, R.drawable.light_food,
-            R.drawable.bill_sub, R.drawable.gym,
+            R.drawable.bill_sub, R.drawable.gym_new,
             R.drawable.carrent, R.drawable.retirement/*,
             R.drawable.meat_fish, R.drawable.construction,
             R.drawable.ent_icon, R.drawable.lovely_time,
