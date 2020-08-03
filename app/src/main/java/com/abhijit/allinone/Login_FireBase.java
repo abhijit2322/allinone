@@ -165,7 +165,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                          Double s_lang=77.676369;
                          UserDetails.ser_lati=Double.toString(s_lati);
                          UserDetails.ser_lang=Double.toString(s_lang);;
-                       // startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
+                        startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
                      //   finish();
                        // UserDetails.userType="Service Provider";
                        // startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
@@ -183,7 +183,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                         //UserDetails.ser_lang=" ";
                         //UserDetails.ser_lati=" ";
 
-                        startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
+                        startActivity(new Intent(Login_FireBase.this, CitizenDashboard.class));//ImageGrid.class));
                     }
                 }
                 else

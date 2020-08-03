@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ScrollView01"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:scrollbars="vertical">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of order you placed "
+            android:textSize="10pt">
+        </TextView>
+
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Number of Order deliverd"
+            android:layout_below="@id/tv1"
+            android:textSize="10pt">
+        </TextView>
+
+        <ImageButton
+            android:id="@+id/go_right"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="190dp"
+            android:layout_below="@id/tv2"
+            android:layout_alignParentBottom="true"
+            android:tooltipText="Place New task"
+            android:src="@drawable/gofront" />
+
+       <!-- <ImageButton
+            android:id="@+id/go_left"
+            android:layout_width="40dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/TextViewTitle2"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/goback" />-->
+
+    </RelativeLayout>
+</ScrollView>
