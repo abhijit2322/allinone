@@ -75,21 +75,61 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            System.out.println("GPS provider not found");
+        }
+
+        fetchLocation();
+        getLocation();
+
+        String Phone = sharedpreferences.getString(UserDetails.phone, "");
+        String loginkey = sharedpreferences.getString(UserDetails.loginkey, "");
+        String logintype=sharedpreferences.getString(UserDetails.logintype, "");
+
+        if(loginkey.contains("complete"))
+        {
+
+            if(logintype.contains("Service Provider"))
+            {
+                UserDetails.userType="Service Provider";
+                UserDetails.username=Phone;
+                //UserDetails.cit_lang=" ";
+                // UserDetails.cit_lati=" ";
+                Double s_lati=12.840711;
+                Double s_lang=77.676369;
+                UserDetails.ser_lati=Double.toString(s_lati);
+                UserDetails.ser_lang=Double.toString(s_lang);;
+                startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
+                //   finish();
+                // UserDetails.userType="Service Provider";
+                // startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
+                //finish();
+                // getApplicationContext().startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
+                //  break;
+            }
+            else
+            {
+                UserDetails.userType="Citizen";
+                UserDetails.username=Phone;
+
+                UserDetails.cit_lang=com_lang;
+                UserDetails.cit_lati=com_lati;
+                //UserDetails.ser_lang=" ";
+                //UserDetails.ser_lati=" ";
+
+                startActivity(new Intent(Login_FireBase.this, CitizenDashboard.class));//ImageGrid.class));
+            }
+        }
 
         initFields();
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();//
         initFireBaseCallbacks();
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-        System.out.println("GPS provider not found");
-        }
 
 
-            fetchLocation();
-        getLocation();
     }
 
     void initFields() {
@@ -144,50 +184,82 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                     return;
                 }
 
+/*
+//                String Phone = sharedpreferences.getString(UserDetails.phone, "");
+//                String loginkey = sharedpreferences.getString(UserDetails.loginkey, "");
+//                String logintype=sharedpreferences.getString(UserDetails.logintype, "");
+//
+//                //if(Phone.trim().contains(etPhone.getText().toString().trim()))
+//            if(Phone.contains(etPhone.getText().toString())&&logintype.contains(occopastion))
+//                {
+//
+//
+//
+//                    if(logintype.contains("Service Provider"))
+//                    {
+//                        UserDetails.userType="Service Provider";
+//                        UserDetails.username=etPhone.getText().toString();
+//                        //UserDetails.cit_lang=" ";
+//                       // UserDetails.cit_lati=" ";
+//                         Double s_lati=12.840711;
+//                         Double s_lang=77.676369;
+//                         UserDetails.ser_lati=Double.toString(s_lati);
+//                         UserDetails.ser_lang=Double.toString(s_lang);;
+//                        startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
+//                     //   finish();
+//                       // UserDetails.userType="Service Provider";
+//                       // startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
+//                        //finish();
+//                       // getApplicationContext().startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
+//                      //  break;
+//                    }
+//                    else
+//                    {
+//                        UserDetails.userType="Citizen";
+//                        UserDetails.username=etPhone.getText().toString();
+//
+//                        UserDetails.cit_lang=com_lang;
+//                        UserDetails.cit_lati=com_lati;
+//                        //UserDetails.ser_lang=" ";
+//                        //UserDetails.ser_lati=" ";
+//
+//                        startActivity(new Intent(Login_FireBase.this, CitizenDashboard.class));//ImageGrid.class));
+//                    }
+//                }
+//                else
+//                {
+//                    SharedPreferences.Editor editor = sharedpreferences.edit();
+//                    editor.putString(UserDetails.phone, etPhone.getText().toString());
+//                    editor.putString(UserDetails.loginkey, "complete");
+//                    editor.putString(UserDetails.logintype, occopastion);
+//                    editor.commit();
+//
+//
+//                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
+//                            Phonenumber,//etPhone.getText().toString(),        // Phone number to verify
+//                            1,                 // Timeout duration
+//                            TimeUnit.MINUTES,   // Unit of timeout
+//                            this,               // Activity (for callback binding)
+//                            mCallbacks);
+//                }
+// //////testing purpose
+//         *//*       if (occopastion.contains("Service Provider"))
+//                {
+//                    // finish();
+//                    UserDetails.userType="Service Provider";
+//                    UserDetails.username=etPhone.getText().toString();
+//                    startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
+//                }
+//                else
+//                {
+//                    // finish();
+//                    UserDetails.userType="Citizen";
+//                    UserDetails.username=etPhone.getText().toString();
+//                    startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
+//                }*//*
+//
+////////testing purpose*/
 
-                String Phone = sharedpreferences.getString(UserDetails.phone, "");
-                String loginkey = sharedpreferences.getString(UserDetails.loginkey, "");
-                String logintype=sharedpreferences.getString(UserDetails.logintype, "");
-
-                //if(Phone.trim().contains(etPhone.getText().toString().trim()))
-            if(Phone.contains(etPhone.getText().toString()))
-                {
-
-
-
-                    if(logintype.contains("Service Provider"))
-                    {
-                        UserDetails.userType="Service Provider";
-                        UserDetails.username=etPhone.getText().toString();
-                        //UserDetails.cit_lang=" ";
-                       // UserDetails.cit_lati=" ";
-                         Double s_lati=12.840711;
-                         Double s_lang=77.676369;
-                         UserDetails.ser_lati=Double.toString(s_lati);
-                         UserDetails.ser_lang=Double.toString(s_lang);;
-                        startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
-                     //   finish();
-                       // UserDetails.userType="Service Provider";
-                       // startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
-                        //finish();
-                       // getApplicationContext().startActivity(new Intent(Login_FireBase.this, TaskAssignment.class));
-                      //  break;
-                    }
-                    else
-                    {
-                        UserDetails.userType="Citizen";
-                        UserDetails.username=etPhone.getText().toString();
-
-                        UserDetails.cit_lang=com_lang;
-                        UserDetails.cit_lati=com_lati;
-                        //UserDetails.ser_lang=" ";
-                        //UserDetails.ser_lati=" ";
-
-                        startActivity(new Intent(Login_FireBase.this, CitizenDashboard.class));//ImageGrid.class));
-                    }
-                }
-                else
-                {
                     SharedPreferences.Editor editor = sharedpreferences.edit();
                     editor.putString(UserDetails.phone, etPhone.getText().toString());
                     editor.putString(UserDetails.loginkey, "complete");
@@ -195,32 +267,12 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                     editor.commit();
 
 
-                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                   PhoneAuthProvider.getInstance().verifyPhoneNumber(
                             Phonenumber,//etPhone.getText().toString(),        // Phone number to verify
                             1,                 // Timeout duration
                             TimeUnit.MINUTES,   // Unit of timeout
                             this,               // Activity (for callback binding)
                             mCallbacks);
-                }
- //////testing purpose
-         /*       if (occopastion.contains("Service Provider"))
-                {
-                    // finish();
-                    UserDetails.userType="Service Provider";
-                    UserDetails.username=etPhone.getText().toString();
-                    startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
-                }
-                else
-                {
-                    // finish();
-                    UserDetails.userType="Citizen";
-                    UserDetails.username=etPhone.getText().toString();
-                    startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
-                }*/
-
-//////testing purpose
-
-
                 break;
             case R.id.resend:
                 break;
@@ -258,8 +310,8 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                                         // UserDetails.cit_lati=" ";
                                         Double s_lati=12.840711; //com_lati
                                         Double s_lang=77.676369; //com_lang
-                                        UserDetails.ser_lati=Double.toString(s_lati);
-                                        UserDetails.ser_lang=Double.toString(s_lang);;
+                                        UserDetails.ser_lati=com_lati;//Double.toString(s_lati);
+                                        UserDetails.ser_lang=com_lang;//Double.toString(s_lang);;
                                         startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
                                     }
                                     else

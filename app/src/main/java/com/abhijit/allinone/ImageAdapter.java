@@ -25,6 +25,8 @@ public class ImageAdapter extends BaseAdapter {
     Integer[] thumbImages;
     String[] imagefooter;
 
+    public ImageAdapter(){}
+
     public ImageAdapter(Context c,String Cr) {
         mContext = c;
         citizen_request=Cr;
