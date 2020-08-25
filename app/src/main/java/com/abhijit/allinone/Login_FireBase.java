@@ -36,6 +36,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.instabug.library.Instabug;
+import com.instabug.library.invocation.InstabugInvocationEvent;
 
 import java.util.concurrent.TimeUnit;
 
@@ -69,6 +71,7 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login_fire_base);
 
         sharedpreferences = getSharedPreferences(UserDetails.MyPREFERENCES, Context.MODE_PRIVATE);
@@ -99,8 +102,12 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                 // UserDetails.cit_lati=" ";
                 Double s_lati=12.840711;
                 Double s_lang=77.676369;
-                UserDetails.ser_lati=Double.toString(s_lati);
-                UserDetails.ser_lang=Double.toString(s_lang);;
+               // Double agt_lat=23.83605;
+                // Double agt_long=91.27939;
+               // UserDetails.cit_lang=com_lang;
+                //UserDetails.cit_lati=com_lati;
+                UserDetails.ser_lati=com_lati;//Double.toString(s_lati);
+                UserDetails.ser_lang=com_lang;//Double.toString(s_lang);;
                 startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
                 //   finish();
                 // UserDetails.userType="Service Provider";
