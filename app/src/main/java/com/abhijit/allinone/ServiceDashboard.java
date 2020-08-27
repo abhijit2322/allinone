@@ -14,11 +14,15 @@ public class ServiceDashboard extends AppCompatActivity {
     ImageButton imb_task;
     TextView tv1,tv2;
     ImageView imv;
+    String register_status="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_service_dashboard);
+
+        Intent i = getIntent();
+        register_status=i.getStringExtra("registered");
 
         tv1 = (TextView) findViewById(R.id.tv1);
         tv2 = (TextView) findViewById(R.id.tv2);
@@ -30,7 +34,10 @@ public class ServiceDashboard extends AppCompatActivity {
 
             @Override
             public void onClick(View arg0) {
-                startActivity(new Intent(ServiceDashboard.this, TaskAssignment.class));
+                if(register_status.contains("yes"))
+                   startActivity(new Intent(ServiceDashboard.this, TaskAssignment.class));
+                else
+                    startActivity(new Intent(ServiceDashboard.this, RegistrationForm.class));
             }
 
         });

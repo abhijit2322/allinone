@@ -46,22 +46,33 @@ tools:context=".Login_FireBase">
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp" >
 
-
-        <ImageButton
+        <Button
             android:id="@+id/bt_send_otp"
-            android:layout_width="50dp"
+            android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_toRightOf="@+id/et_phone"
-            android:layout_marginLeft="120dp"
-            android:background="@drawable/otp_send" />
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:text="Send OTP" />
 
 
-        <ImageButton
-            android:id="@+id/resend"
-            android:layout_width="50dp"
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:background="@drawable/resend" />
+            android:layout_toRightOf="@+id/et_phone"
+            android:layout_marginLeft="5dp"
+            android:background="@null"
+            android:text="Login" />
+
+
+        <Button
+            android:id="@+id/resend"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
+            android:background="@null"
+            android:text="Resend OTP" />
     </TableRow>
 
     <!-- <Button
@@ -87,12 +98,13 @@ tools:context=".Login_FireBase">
     android:layout_marginTop="15dp"
     android:text="Verify OTP" />-->
 
-    <ImageButton
+    <Button
         android:id="@+id/verified"
-        android:layout_width="60dp"
+        android:layout_width="150dp"
         android:layout_height="60dp"
         android:layout_marginLeft="120dp"
-        android:background="@drawable/verified" />
+        android:background="@null"
+        android:text="Verify OTP" />
 
 
    <!-- <TextView

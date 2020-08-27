@@ -45,7 +45,8 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
 
     EditText etPhone, etOtp;
     //Button btSendOtp, btResendOtp, btVerifyOtp;
-    ImageButton btSendOtp, btResendOtp, btVerifyOtp;
+    Button btSendOtp, btResendOtp, btVerifyOtp;
+    Button loginButton;
     Spinner occpas_spinner;
     private FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -108,7 +109,11 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                 //UserDetails.cit_lati=com_lati;
                 UserDetails.ser_lati=com_lati;//Double.toString(s_lati);
                 UserDetails.ser_lang=com_lang;//Double.toString(s_lang);;
-                startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
+                Intent intent = new Intent(this, ServiceDashboard.class);
+                intent.putExtra("registered", "yes");
+                startActivity(intent);
+
+                //startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
                 //   finish();
                 // UserDetails.userType="Service Provider";
                 // startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
@@ -147,11 +152,13 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
        // btVerifyOtp = findViewById(R.id.bt_verify_otp);
         btResendOtp = findViewById(R.id.resend);
         btVerifyOtp = findViewById(R.id.verified);
+        loginButton=findViewById(R.id.bt_login);
 
         occpas_spinner=findViewById(R.id.occopassion);
         btResendOtp.setOnClickListener(this);
         btVerifyOtp.setOnClickListener(this);
         btSendOtp.setOnClickListener(this);
+        loginButton.setOnClickListener(this);
     }
     void initFireBaseCallbacks() {
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -181,15 +188,41 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bt_send_otp:
-                occopastion=occpas_spinner.getSelectedItem().toString();
-                System.out.println("Abhijit The phone Number...."+etPhone.getText().toString()+"   "+occopastion);
-                String Phonenumber="+91"+etPhone.getText().toString();
-
-                if (etPhone.getText().toString().isEmpty()||occopastion.isEmpty())
-                {
+            case R.id.bt_login:
+                occopastion = occpas_spinner.getSelectedItem().toString();
+                if (etPhone.getText().toString().isEmpty() || occopastion.isEmpty()) {
                     return;
                 }
+                if (occopastion.contains("Service Provider"))
+                {
+                    UserDetails.userType="Service Provider";
+                    UserDetails.username=etPhone.getText().toString();
+                    UserDetails.ser_lati=com_lati;
+                    UserDetails.ser_lang=com_lang;
+                    Intent intent = new Intent(Login_FireBase.this, ServiceDashboard.class);
+                    intent.putExtra("registered", "no");
+                    startActivity(intent);
+                   // startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
+                }
+                else
+                {
+                     UserDetails.userType="Citizen";
+                    UserDetails.username=etPhone.getText().toString();
+                    UserDetails.cit_lang=com_lang;
+                    UserDetails.cit_lati=com_lati;
+                    startActivity(new Intent(Login_FireBase.this, CitizenDashboard.class));//ImageGrid.class));
+                }
+                break;
+
+            case R.id.bt_send_otp:
+
+                    occopastion = occpas_spinner.getSelectedItem().toString();
+                    System.out.println("Abhijit The phone Number...." + etPhone.getText().toString() + "   " + occopastion);
+                    String Phonenumber = "+91" + etPhone.getText().toString();
+
+                    if (etPhone.getText().toString().isEmpty() || occopastion.isEmpty()) {
+                        return;
+                    }
 
 /*
 //                String Phone = sharedpreferences.getString(UserDetails.phone, "");
@@ -274,78 +307,81 @@ public class Login_FireBase extends AppCompatActivity implements View.OnClickLis
                     editor.commit();
 
 
-                   PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                    PhoneAuthProvider.getInstance().verifyPhoneNumber(
                             Phonenumber,//etPhone.getText().toString(),        // Phone number to verify
                             1,                 // Timeout duration
                             TimeUnit.MINUTES,   // Unit of timeout
                             this,               // Activity (for callback binding)
                             mCallbacks);
-                break;
+                    break;
+
             case R.id.resend:
                 break;
             case R.id.verified:
-                occopastion=occpas_spinner.getSelectedItem().toString();
 
-                if (etOtp.getText().toString().isEmpty()||occopastion.isEmpty())
-                {
-                    return;
-                }
-                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, etOtp.getText().toString());
+                    occopastion = occpas_spinner.getSelectedItem().toString();
 
-                System.out.println("Abhijit The phone Number...."+etPhone.getText().toString()+"   "+occopastion);
+                    if (etOtp.getText().toString().isEmpty() || occopastion.isEmpty()) {
+                        return;
+                    }
+                    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, etOtp.getText().toString());
 
-                mAuth.signInWithCredential(credential)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    FirebaseUser user = task.getResult().getUser();
-                                    Toast.makeText(Login_FireBase.this, "Verification Success", Toast.LENGTH_SHORT).show();
-                                    addNewContact(user.getPhoneNumber());
-                                    AppGlobalSetting.login_category=occopastion;
-                                    if (occopastion.contains("Service Provider"))
-                                    {
+                    System.out.println("Abhijit The phone Number...." + etPhone.getText().toString() + "   " + occopastion);
 
-                                       // finish();
-                                        //UserDetails.userType="Service Provider";
-                                        //startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
+                    mAuth.signInWithCredential(credential)
+                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        FirebaseUser user = task.getResult().getUser();
+                                        Toast.makeText(Login_FireBase.this, "Verification Success", Toast.LENGTH_SHORT).show();
+                                        addNewContact(user.getPhoneNumber());
+                                        AppGlobalSetting.login_category = occopastion;
+                                        if (occopastion.contains("Service Provider")) {
+
+                                            // finish();
+                                            //UserDetails.userType="Service Provider";
+                                            //startActivity(new Intent(Login_FireBase.this, RegistrationForm.class));
 
 
-                                        UserDetails.userType="Service Provider";
-                                        UserDetails.username=etPhone.getText().toString();
-                                        //UserDetails.cit_lang=" ";
-                                        // UserDetails.cit_lati=" ";
-                                        Double s_lati=12.840711; //com_lati
-                                        Double s_lang=77.676369; //com_lang
-                                        UserDetails.ser_lati=com_lati;//Double.toString(s_lati);
-                                        UserDetails.ser_lang=com_lang;//Double.toString(s_lang);;
-                                        startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
+                                            UserDetails.userType = "Service Provider";
+                                            UserDetails.username = etPhone.getText().toString();
+                                            //UserDetails.cit_lang=" ";
+                                            // UserDetails.cit_lati=" ";
+                                            Double s_lati = 12.840711; //com_lati
+                                            Double s_lang = 77.676369; //com_lang
+                                            UserDetails.ser_lati = com_lati;//Double.toString(s_lati);
+                                            UserDetails.ser_lang = com_lang;//Double.toString(s_lang);;
+
+                                            Intent intent1 = new Intent(Login_FireBase.this, ServiceDashboard.class);
+                                            intent1.putExtra("registered", "no");
+                                            startActivity(intent1);
+                                           // startActivity(new Intent(Login_FireBase.this, ServiceDashboard.class));
+                                        } else {
+                                            // finish();
+                                            // UserDetails.userType="Citizen";
+                                            // startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
+
+                                            UserDetails.userType = "Citizen";
+                                            UserDetails.username = etPhone.getText().toString();
+
+                                            UserDetails.cit_lang = com_lang;
+                                            UserDetails.cit_lati = com_lati;
+                                            //UserDetails.ser_lang=" ";
+                                            //UserDetails.ser_lati=" ";
+
+                                            startActivity(new Intent(Login_FireBase.this, CitizenDashboard.class));//ImageGrid.class));
+                                        }
+                                    } else {
+                                        if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                            Toast.makeText(Login_FireBase.this, "Verification Failed, Invalid credentials", Toast.LENGTH_SHORT).show();
+                                        }
+
                                     }
-                                    else
-                                    {
-                                       // finish();
-                                       // UserDetails.userType="Citizen";
-                                       // startActivity(new Intent(Login_FireBase.this, ImageGrid.class));
-
-                                        UserDetails.userType="Citizen";
-                                        UserDetails.username=etPhone.getText().toString();
-
-                                        UserDetails.cit_lang=com_lang;
-                                        UserDetails.cit_lati=com_lati;
-                                        //UserDetails.ser_lang=" ";
-                                        //UserDetails.ser_lati=" ";
-
-                                        startActivity(new Intent(Login_FireBase.this, CitizenDashboard.class));//ImageGrid.class));
-                                    }
-                                } else {
-                                    if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                        Toast.makeText(Login_FireBase.this, "Verification Failed, Invalid credentials", Toast.LENGTH_SHORT).show();
-                                    }
-
                                 }
-                            }
-                        });
-                break;
+                            });
+                    break;
+
 
 /*                case R.id.bt_sign_out:
                 FirebaseAuth.getInstance().signOut();

@@ -152,9 +152,8 @@ public class ProfileActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), Display_Sms_Call.class));
                 }
                 else{
-
-                 startActivity(new Intent(getApplicationContext(), RegistrationForm.class));
-            }
+                 startActivity(new Intent(getApplicationContext(), Display_Sms_Call.class));
+                }
             }
 
         });
